@@ -32,6 +32,10 @@ const User = sequelize.define('User', {
        type: DataTypes.ENUM('user', 'admin'),
        allowNull: false,
    },
+   token: {
+    type: DataTypes.STRING,
+    allowNull: true,
+   }
 }, {
    tableName: 'Users',
    timestamps: false, // Desativa os campos createdAt e updatedAt, caso não queira usá-los

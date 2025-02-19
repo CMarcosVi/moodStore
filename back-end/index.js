@@ -6,37 +6,39 @@ const port = 3000;
 import createUser from './Controllers/Admin/CreateUser';
 import deleteUser from './Controllers/Admin/DeletUsar';
 import loginUser from './Controllers/User/LoginUser';
+import cookieParser from 'cookie-parser';
+import verificarToken from './middleware/auth';
 
 app.use(cors());
 app.use(helmet());
 app.use(bodyParser.json());
-
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-
-app.get('/', (req,res) => {
-    res.send('ola mundo');
-});
-
-
-app.get('/loginUser', (req,res,next) => {
+app.post('/loginUser', (req,res) => {
     loginUser(req,res)
 })
 
-app.get('/admin/DeleteUser', (req,res,next) => {
-    deleteUser(req,res)
-})
-
-app.get('/admin/FindUser', (req,res,next) => {
+app.post('/admin/FindUser/:id_collaborator', (req,res,next) => {
+    verificarToken(req, res); 
+    next()
     requestUser(req,res)
 })
 
-app.get('/admin/FindAllUsers', (req,res,next) => {
+app.post('/admin/FindAllUsers', (req,res,next) => {
     requestAllUser(req,res)
 })
 
-app.post('/admin/createAcount', (req,res) => {
+app.post('/admin/createAcount', (req,res,next) => {
     createUser(req,res)
 })
-app.listen(3000)
+
+app.put('/admin/updateUser', (req,res,next) => {
+    createUser(req,res)
+})
+
+app.delete('/admin/DeleteUser', (req,res,next) => {
+    deleteUser(req,res)
+})
+
+app.listen(port)

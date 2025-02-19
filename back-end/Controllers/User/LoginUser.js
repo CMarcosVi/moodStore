@@ -1,7 +1,6 @@
-// LoginUser.js
-
+import bcrypt from 'bcrypt'; 
+import crypto from 'crypto';
 import User from "../../Models/Users";
-
 
 const loginUser = async (req, res) => {
     const { access, password } = req.body;
@@ -15,14 +14,20 @@ const loginUser = async (req, res) => {
         if (!user) {
             return res.status(400).json({ error: 'Usuário não encontrado' });
         }
-        if(user.password !== password){
-            res.status(400).json({ error : 'senha invalida'})
-        };
+
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+
         if (!isPasswordValid) {
             return res.status(400).json({ error: 'Senha inválida' });
         }
+        const token = crypto.randomBytes(64).toString('hex');
 
-        return res.status(200).json({ message: 'Login bem-sucedido', token });
+        await user.update({ token });
+
+        return res.status(200).json({ 
+            message: 'Login bem-sucedido',
+            token: token
+         });
 
     } catch (error) {
         console.error('Erro no login:', error);

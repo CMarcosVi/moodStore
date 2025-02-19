@@ -9,5 +9,6 @@ CREATE TABLE Users (
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     id_collaborator int(4) NOT NULL,
+    token VARCHAR(150),
     type_user ENUM('user', 'admin') NOT NULL
 );
