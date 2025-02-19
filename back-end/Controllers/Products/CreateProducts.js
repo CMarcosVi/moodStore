@@ -6,7 +6,6 @@ const sanitizeInput = (input) => {
     return input.trim().replace(/<[^>]*>/g, ''); 
 };
 
-// Função para criar o usuário
 const createProduct = async (req, res) => {
     const { name, id_product ,quantidy } = req.body;
 
