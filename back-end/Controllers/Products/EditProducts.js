@@ -1,9 +1,9 @@
-import User from "../../Models/Users";
+import Product from "../../Models/Product";
 
 const updateProduct = async (req, res) => {
     try {
         const { name, id_product ,quantidy } = req.body;
-        const product = await User.findByPk(req.params.id_product);
+        const product = await Product.findByPk(req.params.id_product);
       
       if (product) {
         product.name = name || product.name;

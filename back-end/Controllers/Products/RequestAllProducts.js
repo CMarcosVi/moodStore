@@ -1,10 +1,10 @@
 // requestUser.js
 
-import User from "../../Models/Users";  // Importando o modelo de usuário
+import Product from "../../Models/Product";  // Importando o modelo de usuário
 
 const requestAllProduct = async (req, res) => {
     try {
-        const products = await Products.findAll(); //mudar User para Products
+        const products = await Product.findAll(); //mudar User para Products
 
         if (!products || products.length === 0) {
             return res.status(404).json({ error: 'Nenhum usuário encontrado' });

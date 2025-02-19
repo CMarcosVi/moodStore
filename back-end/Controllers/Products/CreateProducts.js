@@ -1,6 +1,6 @@
 // CreateUser.js
 
-import User from "../../Models/Users";
+import Product from "../../Models/Product";
 
 const sanitizeInput = (input) => {
     return input.trim().replace(/<[^>]*>/g, ''); 
@@ -19,7 +19,7 @@ const createProduct = async (req, res) => {
         const sanitized_id_product = parseInt(id_product, 8);
 
 
-        const existingUser = await User.findOne({ where: { email: sanitized_name } }); //mudar User para Product
+        const existingUser = await Product.findOne({ where: { email: sanitized_name } }); //mudar User para Product
 
         if (existingUser) {
             return res.status(400).json({ error: 'Este email já está cadastrado.' });

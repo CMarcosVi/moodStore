@@ -1,6 +1,6 @@
 // LoginUser.js
 
-import User from "../../Models/Users";
+import Product from "../../Models/Product";
 
 
 const requestProducts = async (req, res) => {
@@ -11,7 +11,7 @@ const requestProducts = async (req, res) => {
     }
 
     try {
-        const products = await User.findOne({ where: { id_product } }); //mudar User para Products
+        const products = await Product.findOne({ where: { id_product } }); //mudar User para Products
         if (!products) {
             return res.status(400).json({ error: 'Produto não encontrado' });
         }
