@@ -1,13 +1,18 @@
 const express = require('express');
+const helmet = require("helmet");
+const cors = require("cors");
 const app = express();
 const port = 3000;
 import createUser from './Controllers/Admin/CreateUser';
 import deleteUser from './Controllers/Admin/DeletUsar';
 import loginUser from './Controllers/User/LoginUser';
 
+app.use(cors());
+app.use(helmet());
 app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: true }));
+
 
 
 app.get('/', (req,res) => {
