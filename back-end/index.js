@@ -1,13 +1,15 @@
-const express = require('express');
-const helmet = require("helmet");
-const cors = require("cors");
+import express from 'express';
+import helmet from 'helmet';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+
 const app = express();
 const port = 3000;
-import createUser from './Controllers/Admin/CreateUser';
-import deleteUser from './Controllers/Admin/DeletUsar';
-import loginUser from './Controllers/User/LoginUser';
-import cookieParser from 'cookie-parser';
-import verificarToken from './middleware/auth';
+import loginUser from './Controllers/User/LoginUser.js';
+//import createUser from './Controllers/Admin/createUser';
+//import deleteUser from './Controllers/Admin/DeletUsar';
+//import cookieParser from 'cookie-parser';
+//import verificarToken from './Middlewares/auth.js';
 
 app.use(cors());
 app.use(helmet());
@@ -18,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.post('/loginUser', (req,res) => {
     loginUser(req,res)
 })
-
+/*
 app.post('/admin/FindUser/:id_collaborator', (req,res,next) => {
     verificarToken(req, res); 
     next()
@@ -39,6 +41,6 @@ app.put('/admin/updateUser', (req,res,next) => {
 
 app.delete('/admin/DeleteUser', (req,res,next) => {
     deleteUser(req,res)
-})
+})*/
 
 app.listen(port)

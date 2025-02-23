@@ -1,6 +1,8 @@
 import bcrypt from 'bcrypt'; 
 import crypto from 'crypto';
-import User from "../../Models/Users";
+import User from "../../Models/Users.js";
+import sanitization from '../../utils/sanitization.js';
+
 
 const loginUser = async (req, res) => {
     const { access, password } = req.body;
@@ -8,14 +10,15 @@ const loginUser = async (req, res) => {
     if (!access || !password) {
         return res.status(400).json({ error: 'Acesso e Senha são obrigatórios' });
     }
-
     try {
-        const user = await User.findOne({ where: { access } });
+        const accessSanitizad = sanitization.sanitizeName(access);
+        const passwordSanitizad = sanitization.sanitizePassword(password);
+        const user = await User.findOne({ where: { access: accessSanitizad } });
         if (!user) {
             return res.status(400).json({ error: 'Usuário não encontrado' });
         }
 
-        const isPasswordValid = await bcrypt.compare(password, user.password);
+        const isPasswordValid = await bcrypt.compare(passwordSanitizad, user.password);
 
         if (!isPasswordValid) {
             return res.status(400).json({ error: 'Senha inválida' });

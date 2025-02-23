@@ -1,0 +1,11 @@
+pandas
+numpy
+matplotlib
+seaborn
+scipy
+python-pptx
+Pillow
+reportlab
+fpdf
+weasyprint
+openpyxl

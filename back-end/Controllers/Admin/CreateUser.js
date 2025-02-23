@@ -1,9 +1,8 @@
 import User from "../../Models/Users";
 import bcrypt from 'bcrypt'
+import sanitization from "../../utils/sanitization";
 
-const sanitizeInput = (input) => {
-    return input.trim().replace(/<[^>]*>/g, '');
-};
+
 
 const createUser = async (req, res) => {
     const { name, access, email, password, id_collaborator, type_user } = req.body;
@@ -13,12 +12,12 @@ const createUser = async (req, res) => {
     }
 
     try {
-        const sanitized_name = sanitizeInput(name);
-        const sanitized_access = sanitizeInput(access);
-        const sanitized_email = sanitizeInput(email);
-        const sanitized_password = sanitizeInput(password);
+        const sanitized_name = sanitization.sanitizeName(name);
+        const sanitized_access = sanitization.sanitizeName(access);
+        const sanitized_email = sanitization.sanitizeEmail(email);
+        const sanitized_password = sanitization.sanitizePassword(password);
         const sanitized_id_collaborator = parseInt(id_collaborator, 10);
-        const sanitized_type_user = sanitizeInput(type_user);
+        const sanitized_type_user = sanitization.sanitizeName(type_user);
 
         if (!['user', 'admin'].includes(sanitized_type_user)) {
             return res.status(400).json({ error: 'O tipo de usuário deve ser "user" ou "admin".' });
