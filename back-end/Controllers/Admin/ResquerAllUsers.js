@@ -1,6 +1,6 @@
 // requestUser.js
 
-import User from "../../Models/Users"; 
+import User from "../../Models/Users.js"; 
 const requestAllUser = async (req, res) => {
     try {
         const users = await User.findAll();

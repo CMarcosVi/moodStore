@@ -1,6 +1,6 @@
 // LoginUser.js
 
-import User from "../../Models/Users";
+import User from "../../Models/Users.js";
 
 
 const deleteUser = async (req, res) => {

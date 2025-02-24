@@ -1,5 +1,5 @@
-import User from "../../Models/Users";
-import sanitization from "../../utils/sanitization";
+import User from "../../Models/Users.js";
+import sanitization from "../../utils/sanitization.js";
 
 
 const updateUser = async (req, res) => {

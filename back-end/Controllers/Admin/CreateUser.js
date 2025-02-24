@@ -1,6 +1,6 @@
-import User from "../../Models/Users";
+import User from "../../Models/Users.js";
 import bcrypt from 'bcrypt'
-import sanitization from "../../utils/sanitization";
+import sanitization from "../../utils/sanitization.js";
 
 
 

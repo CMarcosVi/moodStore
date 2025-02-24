@@ -10,7 +10,7 @@ const loginUser = async (req, res) => {
     if (!access || !password) {
         return res.status(400).json({ error: 'Acesso e Senha são obrigatórios' });
     }
-    try {
+    try { 
         const accessSanitizad = sanitization.sanitizeName(access);
         const passwordSanitizad = sanitization.sanitizePassword(password);
         const user = await User.findOne({ where: { access: accessSanitizad } });
