@@ -1,5 +1,5 @@
 // requestUser.js
-
+// teste APROVADO
 import User from "../../Models/Users.js"; 
 const requestAllUser = async (req, res) => {
     try {

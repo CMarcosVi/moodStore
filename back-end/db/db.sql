@@ -36,3 +36,24 @@ CREATE TABLE Teams (
     FOREIGN KEY (component3) REFERENCES Users(name),
     FOREIGN KEY (component4) REFERENCES Users(name)
 );
+
+
+-- TESTE
+
+INSERT INTO Users (name, access, email, password, id_collaborator, token, type_user)
+VALUES 
+('Alice Oliveira', 'Full', 'alice@exemplo.com', 'senha123', 1001, null, 'admin'),
+('Bob Silva', 'Partial', 'bob@exemplo.com', 'senha456', 1002, 'token_456', 'user'),
+('Carlos Santos', 'Full', 'carlos@exemplo.com', 'senha789', 1003, 'token_789', 'admin');
+
+INSERT INTO Products (name, quantity, id_product)
+VALUES 
+('Produto A', 100, 101),
+('Produto B', 50, 102),
+('Produto C', 200, 103);
+
+
+INSERT INTO Teams (nameTeam, teamArea, component1, component2, component3, component4)
+VALUES 
+('Equipe de Desenvolvimento', 'Desenvolvimento de software', 'Alice Oliveira', 'Bob Silva', 'Carlos Santos', NULL),
+('Equipe de Marketing', 'Promoção e comunicação', 'Bob Silva', 'Carlos Santos', 'Alice Oliveira', NULL);

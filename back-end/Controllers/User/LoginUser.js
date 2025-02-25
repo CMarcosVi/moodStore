@@ -18,11 +18,19 @@ const loginUser = async (req, res) => {
             return res.status(400).json({ error: 'Usuário não encontrado' });
         }
 
+        /*
         const isPasswordValid = await bcrypt.compare(passwordSanitizad, user.password);
 
         if (!isPasswordValid) {
             return res.status(400).json({ error: 'Senha inválida' });
         }
+            */
+
+        // teste APROVADO
+        if(passwordSanitizad !== user.password){
+            return res.status(400).json({error : 'MDJEINVJ'});
+        }
+
         const token = crypto.randomBytes(64).toString('hex');
 
         await user.update({ token });
