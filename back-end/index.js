@@ -11,6 +11,13 @@ import requestAllUser from './Controllers/Admin/ResquerAllUsers.js';
 import createUser from './Controllers/Admin/createUser.js';
 import deleteUser from './Controllers/Admin/DeletUsar.js';
 import updateUser from './Controllers/Admin/EditUser.js';
+
+
+import createProduct from './Controllers/Products/CreateProducts.js';
+import updateProduct from './Controllers/Products/EditProducts.js';
+import requestAllProduct from './Controllers/Products/RequestAllProducts.js';
+import requestProducts from './Controllers/Products/RequestProduct.js';
+import deleteProduct from './Controllers/Products/DeleteProducts.js';
 //import cookieParser from 'cookie-parser';
 //import verificarToken from './Middlewares/auth.js';
 
@@ -45,8 +52,24 @@ app.put('/admin/updateUser', (req,res,next) => {
     updateUser(req,res)
 })
 /*
-
-
+products
 */
+
+app.post('/products/CreateProduct', (req,res,next) => {
+    createProduct(req,res)
+})
+app.put('/products/EditProduct', (req,res,next) => {
+    updateProduct(req,res)
+})
+app.post('/products/RequestAllProducts', (req,res,next) => {
+    requestAllProduct(req,res)
+})
+app.post('/products/RequestProduct', (req,res,next) => {
+    requestProducts(req,res)
+})
+app.delete('/products/DeleteProduct', (req,res,next) => {
+    deleteProduct(req,res)
+})
+
 
 app.listen(port)

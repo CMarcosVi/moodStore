@@ -1,6 +1,6 @@
 // CreateUser.js
 
-import Product from "../../Models/Product";
+import Product from "../../Models/Product.js";
 
 const sanitizeInput = (input) => {
     return input.trim().replace(/<[^>]*>/g, ''); 

@@ -1,6 +1,6 @@
 // requestUser.js
 
-import Product from "../../Models/Product";  // Importando o modelo de usuário
+import Product from "../../Models/Product.js";  // Importando o modelo de usuário
 
 const requestAllProduct = async (req, res) => {
     try {

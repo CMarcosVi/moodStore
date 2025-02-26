@@ -1,6 +1,6 @@
 // LoginUser.js
 
-import Product from "../../Models/Users";
+import Product from "../../Models/Product.js";
 
 
 const deleteProduct = async (req, res) => {

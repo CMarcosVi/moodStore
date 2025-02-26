@@ -1,6 +1,6 @@
 // LoginUser.js
 
-import Product from "../../Models/Product";
+import Product from "../../Models/Product.js";
 
 
 const requestProducts = async (req, res) => {
