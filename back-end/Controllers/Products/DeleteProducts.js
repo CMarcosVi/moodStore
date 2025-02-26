@@ -1,4 +1,3 @@
-// LoginUser.js
 
 import Product from "../../Models/Product.js";
 
@@ -6,17 +5,17 @@ import Product from "../../Models/Product.js";
 const deleteProduct = async (req, res) => {
     const { id_product } = req.body;
 
-    if (!id_collaborator) {
+    if (!id_product) {
         return res.status(400).json({ error: 'Por favor insira um valor' });
     }
 
     try {
-        const Product = await Product.findOne({ where: { id_product } }); //mudar User para Product
-        if (!Product) {
+        const Products = await Product.findOne({ where: { id_product } });
+        if (!Products) {
             return res.status(400).json({ error: 'produto não encontrado' });
         }
 
-        await Product.destroy({where: {id_product}});
+        await Products.destroy({where: {id_product}});
         return res.status(200).json({ message: 'Excluido com sucesso' });
 
     } catch (error) {
