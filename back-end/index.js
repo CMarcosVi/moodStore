@@ -18,6 +18,13 @@ import updateProduct from './Controllers/Products/EditProducts.js';
 import requestAllProduct from './Controllers/Products/RequestAllProducts.js';
 import requestProducts from './Controllers/Products/RequestProduct.js';
 import deleteProduct from './Controllers/Products/DeleteProducts.js';
+
+
+import createTeam from './Controllers/Admin/team/CreateTeam.js';
+import getAllTeams from './Controllers/Admin/team/AllTems.js';
+import deleteTeam from './Controllers/Admin/team/DeleteTeam.js';
+import updateTeam from './Controllers/Admin/team/EditTeam.js';
+import getTeamById from './Controllers/Admin/team/FindTeam.js';
 //import cookieParser from 'cookie-parser';
 //import verificarToken from './Middlewares/auth.js';
 
@@ -69,6 +76,25 @@ app.post('/products/RequestProduct', (req,res,next) => {
 })
 app.delete('/products/DeleteProduct', (req,res,next) => {
     deleteProduct(req,res)
+})
+
+/*
+Teams
+*/
+app.post('/admin/teams/AllTeams', (req,res,next) => {
+    getAllTeams(req,res)
+})
+app.post('/admin/teams/CreateTeam', (req,res,next) => {
+    createTeam(req,res)
+})
+app.post('/admin/teams/FindTeam', (req,res,next) => {
+    getTeamById(req,res)
+})
+app.delete('/admin/teams/DeleteTeam', (req,res,next) => {
+    deleteTeam(req,res)
+})
+app.put('/admin/teams/EditTeam', (req,res,next) => {
+    updateTeam(req,res)
 })
 
 

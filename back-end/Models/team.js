@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
-import sequelize from './configDb';
+import sequelize from './ConfingDb.js';
+
 
 const Team = sequelize.define('Team', {
   id: {

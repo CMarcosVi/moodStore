@@ -1,4 +1,4 @@
-import Team from '../models/Team';
+import Team from '../../../Models/team.js';
 
 export const getTeamById = async (req, res) => {
   try {
@@ -12,3 +12,5 @@ export const getTeamById = async (req, res) => {
     res.status(400).json({ message: 'Erro ao obter time', error });
   }
 };
+
+export default getTeamById;

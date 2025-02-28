@@ -1,4 +1,4 @@
-import Team from '../models/Team';
+import Team from '../../../Models/team.js';
 
 export const updateTeam = async (req, res) => {
   try {
@@ -15,3 +15,5 @@ export const updateTeam = async (req, res) => {
     res.status(400).json({ message: 'Erro ao atualizar time', error });
   }
 };
+
+export default updateTeam;

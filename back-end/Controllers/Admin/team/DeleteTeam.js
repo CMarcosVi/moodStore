@@ -1,6 +1,6 @@
-import Team from '../models/Team';
+import Team from '../../../Models/team.js';
 
-export const deleteTeam = async (req, res) => {
+const deleteTeam = async (req, res) => {
   try {
     const { id } = req.body;
     const team = await Team.findByPk(id);
@@ -15,3 +15,5 @@ export const deleteTeam = async (req, res) => {
     res.status(400).json({ message: 'Erro ao excluir time', error });
   }
 };
+
+export default deleteTeam;

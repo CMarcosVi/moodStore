@@ -1,6 +1,6 @@
-import Team from '../models/Team';
+import Team from '../../../Models/team.js';
 
-export const createTeam = async (req, res) => {
+const createTeam = async (req, res) => {
   try {
     const { nameTeam, teamArea, component1, component2, component3, component4 } = req.body;
     const team = await Team.create({ nameTeam, teamArea, component1, component2, component3, component4 });
@@ -9,3 +9,5 @@ export const createTeam = async (req, res) => {
     res.status(400).json({ message: 'Erro ao criar time', error });
   }
 };
+
+export default createTeam;
