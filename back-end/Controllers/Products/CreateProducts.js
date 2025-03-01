@@ -1,5 +1,3 @@
-// CreateUser.js
-
 import Product from "../../Models/Product.js";
 
 const sanitizeInput = (input) => {
@@ -7,32 +5,41 @@ const sanitizeInput = (input) => {
 };
 
 const createProduct = async (req, res) => {
-    const { name, id_product ,quantidy } = req.body;
+    const { name, id_product, quantity } = req.body;
 
-    if (!name || !quantidy) {
-        return res.status(400).json({ error: "Todos os campos são obrigatórios" });
+    // Verificar se todos os campos obrigatórios foram fornecidos
+    if (!name || !quantity || !id_product) {
+        return res.status(400).json({ error: "Todos os campos são obrigatórios", product: req.body });
+    }
+
+    // Validar se 'quantity' e 'id_product' são números válidos
+    const sanitized_quantity = parseInt(quantity, 10); // Garantir que a quantidade seja um número inteiro
+    const sanitized_id_product = parseInt(id_product, 10); // Garantir que o id_product seja um número inteiro
+
+    if (isNaN(sanitized_quantity) || isNaN(sanitized_id_product)) {
+        return res.status(400).json({ error: 'Quantity e id_product devem ser números válidos' });
     }
 
     try {
+        // Sanitizar o nome para remover qualquer HTML ou caracteres especiais
         const sanitized_name = sanitizeInput(name);
-        const sanitized_quantidy = parseInt(quantidy);
-        const sanitized_id_product = parseInt(id_product, 8);
 
+        // Verificar se o produto com o mesmo id já existe
+        const existingProduct = await Product.findOne({ where: { id_product: sanitized_id_product } });
 
-        const existingUser = await Product.findOne({ where: { email: sanitized_name } }); //mudar User para Product
-
-        if (existingUser) {
-            return res.status(400).json({ error: 'Este email já está cadastrado.' });
+        if (existingProduct) {
+            return res.status(400).json({ error: 'Este Produto já está cadastrado.' });
         }
 
-        
-        const createNewProduct = await User.create({
+        // Criar o novo produto no banco de dados
+        const createNewProduct = await Product.create({
             name: sanitized_name,
-            access: sanitized_quantidy,
-            quantidy: sanitized_id_product
+            quantity: sanitized_quantity,
+            id_product: sanitized_id_product
         });
 
-        return res.status(201).json({ message: 'Novo produto criado', user: createNewProduct });
+        // Retornar uma resposta de sucesso
+        return res.status(201).json({ message: 'Novo produto criado', Produto: createNewProduct });
 
     } catch (error) {
         console.error('Erro ao criar o produto:', error);

@@ -1,7 +1,5 @@
-// LoginUser.js
-
+// teste APROVADO
 import User from "../../Models/Users.js";
-
 
 const requestUser = async (req, res) => {
     const { id_collaborator } = req.body;
@@ -15,7 +13,7 @@ const requestUser = async (req, res) => {
         if (!user) {
             return res.status(400).json({ error: 'Usuário não encontrado' });
         }
-        return res.status(200).json({ message: 'Usuario encontrado', value: user });
+        return res.status(200).json({ value: user });
 
     } catch (error) {
        console.error('Erro ao procurar usuario', error);

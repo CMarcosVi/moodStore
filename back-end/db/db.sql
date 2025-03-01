@@ -5,12 +5,12 @@ USE enmp;
 -- Tabela Users
 CREATE TABLE Users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL UNIQUE,  -- Garantindo que o nome seja único
+    name VARCHAR(255) NOT NULL,  -- Nome do usuário
     access VARCHAR(100) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
-    id_collaborator INT(4) NOT NULL,
-    token VARCHAR(150),
+    id_collaborator INT NOT NULL UNIQUE,  -- Definindo 'id_collaborator' como único
+    token VARCHAR(255),  -- Maior tamanho para tokens
     type_user ENUM('user', 'admin') NOT NULL
 );
 
@@ -18,8 +18,8 @@ CREATE TABLE Users (
 CREATE TABLE Products (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    quantity INT NOT NULL, -- Corrigido de 'quantidy' para 'quantity'
-    id_product INT NOT NULL UNIQUE
+    quantity INT NOT NULL,
+    id_product INT UNIQUE NOT NULL  -- id_product único
 );
 
 -- Tabela Teams
@@ -27,33 +27,34 @@ CREATE TABLE Teams (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nameTeam VARCHAR(255) NOT NULL,
     teamArea TEXT NOT NULL,
-    component1 VARCHAR(255),  -- Usando 'name' de Users
-    component2 VARCHAR(255),  -- Usando 'name' de Users
-    component3 VARCHAR(255),  -- Usando 'name' de Users
-    component4 VARCHAR(255),  -- Usando 'name' de Users
-    FOREIGN KEY (component1) REFERENCES Users(name),
-    FOREIGN KEY (component2) REFERENCES Users(name),
-    FOREIGN KEY (component3) REFERENCES Users(name),
-    FOREIGN KEY (component4) REFERENCES Users(name)
+    component1 INT,  -- Usando 'id_collaborator' de Users
+    component2 INT,  -- Usando 'id_collaborator' de Users
+    component3 INT,  -- Usando 'id_collaborator' de Users
+    component4 INT,  -- Usando 'id_collaborator' de Users
+    FOREIGN KEY (component1) REFERENCES Users(id_collaborator),
+    FOREIGN KEY (component2) REFERENCES Users(id_collaborator),
+    FOREIGN KEY (component3) REFERENCES Users(id_collaborator),
+    FOREIGN KEY (component4) REFERENCES Users(id_collaborator)
 );
-
 
 -- TESTE
 
+-- Inserindo usuários com senha criptografada
 INSERT INTO Users (name, access, email, password, id_collaborator, token, type_user)
 VALUES 
-('Alice Oliveira', 'Full', 'alice@exemplo.com', 'senha123', 1001, null, 'admin'),
-('Bob Silva', 'Partial', 'bob@exemplo.com', 'senha456', 1002, 'token_456', 'user'),
-('Carlos Santos', 'Full', 'carlos@exemplo.com', 'senha789', 1003, 'token_789', 'admin');
+('Alice Oliveira', 'Full', 'alice@exemplo.com', '$2b$10$RjfaFa8j5I1OlY.EeghD9uZRfrzvWl1NFM2I.yXzY3wMXaqEGaVeC', 1001, NULL, 'admin'),
+('Bob Silva', 'Partial', 'bob@exemplo.com', '$2b$10$Dcdh1.G6jo1FcT3dfq6Edkpht0hFVabJ3fV0tkv2weOhbRs2IoaE.', 1002, 'token_456', 'user'),
+('Carlos Santos', 'Full', 'carlos@exemplo.com', '$2b$10$GbVjghHpVOTM07JQna.kU7cqe98VA1nCckmpUl9u5pzyFkDQZx2Q.', 1003, 'token_789', 'admin');
 
+-- Inserindo produtos
 INSERT INTO Products (name, quantity, id_product)
 VALUES 
 ('Produto A', 100, 101),
 ('Produto B', 50, 102),
 ('Produto C', 200, 103);
 
-
+-- Inserindo equipes, agora com 'id_collaborator' de Users
 INSERT INTO Teams (nameTeam, teamArea, component1, component2, component3, component4)
 VALUES 
-('Equipe de Desenvolvimento', 'Desenvolvimento de software', 'Alice Oliveira', 'Bob Silva', 'Carlos Santos', NULL),
-('Equipe de Marketing', 'Promoção e comunicação', 'Bob Silva', 'Carlos Santos', 'Alice Oliveira', NULL);
+('Equipe de Desenvolvimento', 'Desenvolvimento de software', 1001, 1002, 1003, NULL),
+('Equipe de Marketing', 'Promoção e comunicação', 1002, 1003, 1001, NULL);

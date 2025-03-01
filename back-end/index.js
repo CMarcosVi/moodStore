@@ -19,12 +19,13 @@ import requestAllProduct from './Controllers/Products/RequestAllProducts.js';
 import requestProducts from './Controllers/Products/RequestProduct.js';
 import deleteProduct from './Controllers/Products/DeleteProducts.js';
 
-
+/*
 import createTeam from './Controllers/Admin/team/CreateTeam.js';
 import getAllTeams from './Controllers/Admin/team/AllTems.js';
 import deleteTeam from './Controllers/Admin/team/DeleteTeam.js';
 import updateTeam from './Controllers/Admin/team/EditTeam.js';
 import getTeamById from './Controllers/Admin/team/FindTeam.js';
+*/
 //import cookieParser from 'cookie-parser';
 //import verificarToken from './Middlewares/auth.js';
 
@@ -38,7 +39,7 @@ app.post('/loginUser', (req,res) => {
     loginUser(req,res)
 })
 
-app.post('/admin/FindUser/:id_collaborator', (req,res,next) => {
+app.post('/admin/FindUser', (req,res,next) => {
     //verificarToken(req, res); 
     //next()
     requestUser(req,res)
@@ -48,9 +49,9 @@ app.post('/admin/ResquerAllUsers', (req,res,next) => {
     requestAllUser(req,res)
 })
 
-app.delete('/admin/DeleteUser', (req,res,next) => {
-    deleteUser(req,res)
-})
+app.delete('/admin/DeleteUser', (req, res, next) => {
+    deleteUser(req, res)
+});
 
 app.post('/admin/createAcount', (req,res,next) => {
     createUser(req,res)
@@ -65,9 +66,9 @@ products
 app.post('/products/CreateProduct', (req,res,next) => {
     createProduct(req,res)
 })
-app.put('/products/EditProduct', (req,res,next) => {
-    updateProduct(req,res)
-})
+app.put('/products/EditProduct', (req, res, next) => {
+    updateProduct(req, res); // Chama a função que você criou para atualizar o produto
+});
 app.post('/products/RequestAllProducts', (req,res,next) => {
     requestAllProduct(req,res)
 })
@@ -80,7 +81,7 @@ app.delete('/products/DeleteProduct', (req,res,next) => {
 
 /*
 Teams
-*/
+
 app.post('/admin/teams/AllTeams', (req,res,next) => {
     getAllTeams(req,res)
 })
@@ -96,6 +97,6 @@ app.delete('/admin/teams/DeleteTeam', (req,res,next) => {
 app.put('/admin/teams/EditTeam', (req,res,next) => {
     updateTeam(req,res)
 })
-
+*/
 
 app.listen(port)

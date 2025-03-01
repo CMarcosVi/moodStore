@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import sequelize from './ConfingDb.js';
 
-const Product = sequelize.define('Product', {
+const Product = sequelize.define('Products', {
    id: {
        type: DataTypes.INTEGER,
        primaryKey: true,
@@ -11,7 +11,7 @@ const Product = sequelize.define('Product', {
        type: DataTypes.STRING,
        allowNull: false,
    },
-   quantidy: {
+   quantity: {  // Corrigido de 'quantidy' para 'quantity'
        type: DataTypes.INTEGER,
        allowNull: false,
    },
@@ -21,10 +21,8 @@ const Product = sequelize.define('Product', {
        unique: true,
    },
 }, {
-   tableName: 'Users',
+   tableName: 'Products',  // Corrigido de 'Users' para 'Products'
    timestamps: false, // Desativa os campos createdAt e updatedAt, caso não queira usá-los
 });
 
-
-
- export default Product;
+export default Product;

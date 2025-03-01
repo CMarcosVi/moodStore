@@ -1,13 +1,14 @@
 const sanitizeName = (name) => {
-    const regex = /^[a-zA-Z\s]+$/;
+    const regex = /^[a-zA-ZÀ-ÖØ-öø-ÿ\s]+$/;
     if (!regex.test(name)) {
-        throw new Error('Nome inválido. Apenas letras e espaços são permitidos.');
+        throw new Error('Nome inválido. Apenas letras, acentos e espaços são permitidos.');
     }
     if (/<script.*?>.*?<\/script>/i.test(name)) {
         throw new Error('Nome contém código de script inválido.');
     }
     return name.trim();
 }
+
 
 const sanitizePassword = (password) => {
     const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;

@@ -2,21 +2,26 @@ import Product from "../../Models/Product.js";
 
 const updateProduct = async (req, res) => {
     try {
-        const { name, id_product ,quantidy } = req.body;
-        const product = await Product.findByPk(req.params.id_product);
-      
-      if (product) {
-        product.name = name || product.name;
-        product.id_product = id_product || product.id_product;
-        product.quantidy = quantidy || product.quantidy;
+        const { id_product, name, quantity } = req.body;
 
-        await product.save();
-        res.status(200).json(product);
-      } else {
-        res.status(404).json({ message: 'Produto não encontrado' });
-      }
+        if (!id_product || !name || !quantity) {
+            return res.status(400).json({ error: "Campos obrigatórios faltando." });
+        }
+
+        const product = await Product.findOne({ where: { id_product } });
+
+        if (product) {
+            product.name = name || product.name;
+            product.quantity = quantity || product.quantity;  
+
+            await product.save();
+
+            return res.status(200).json(product);
+        } else {
+            return res.status(404).json({ message: 'Produto não encontrado' });
+        }
     } catch (error) {
-      res.status(500).json({ error: 'Erro ao atualizar o usuário', message: error.message });
+        return res.status(500).json({ error: 'Erro ao atualizar o produto', message: error.message });
     }
 };
 

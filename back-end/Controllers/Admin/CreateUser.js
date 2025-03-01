@@ -1,14 +1,13 @@
+// teste APROVADO
 import User from "../../Models/Users.js";
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcrypt';
 import sanitization from "../../utils/sanitization.js";
-
-
 
 const createUser = async (req, res) => {
     const { name, access, email, password, id_collaborator, type_user } = req.body;
 
     if (!name || !access || !email || !password || !id_collaborator || !type_user) {
-        return res.status(400).json({ error: "Todos os campos são obrigatórios" });
+        return res.status(400).json({ erro: 'Campos obrigatórios ausentes.' });
     }
 
     try {
@@ -23,11 +22,21 @@ const createUser = async (req, res) => {
             return res.status(400).json({ error: 'O tipo de usuário deve ser "user" ou "admin".' });
         }
 
-        const existingUser = await User.findOne({ where: { email: sanitized_email } });
+        const existingAccess = await User.findOne({ where: { access: sanitized_access } });
+        if (existingAccess) {
+            return res.status(400).json({ error: 'Este tipo de acesso já está em uso.' });
+        }
 
+        const existingCollaborator = await User.findOne({ where: { id_collaborator: sanitized_id_collaborator } });
+        if (existingCollaborator) {
+            return res.status(400).json({ error: 'Este ID de colaborador já está em uso.' });
+        }
+
+        const existingUser = await User.findOne({ where: { email: sanitized_email } });
         if (existingUser) {
             return res.status(400).json({ error: 'Este email já está cadastrado.' });
         }
+
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(sanitized_password, salt);
 
@@ -35,7 +44,7 @@ const createUser = async (req, res) => {
             name: sanitized_name,
             access: sanitized_access,
             email: sanitized_email,
-            password: hashedPassword, 
+            password: hashedPassword,
             id_collaborator: sanitized_id_collaborator,
             type_user: sanitized_type_user
         });
@@ -48,5 +57,4 @@ const createUser = async (req, res) => {
     }
 };
 
-// Exportando a função para ser utilizada em outro lugar
 export default createUser;
