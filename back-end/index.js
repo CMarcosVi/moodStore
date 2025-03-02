@@ -26,8 +26,8 @@ import deleteTeam from './Controllers/Admin/team/DeleteTeam.js';
 import updateTeam from './Controllers/Admin/team/EditTeam.js';
 
 
-//import cookieParser from 'cookie-parser';
-//import verificarToken from './Middlewares/auth.js';
+import cookieParser from 'cookie-parser';
+import verificarToken from './Middlewares/auth.js';
 
 app.use(cors());
 app.use(helmet());
@@ -39,43 +39,41 @@ app.post('/loginUser', (req,res) => {
     loginUser(req,res)
 })
 
-app.post('/admin/FindUser', (req,res,next) => {
-    //verificarToken(req, res); 
-    //next()
+app.post('/admin/FindUser',verificarToken, (req,res,) => {
     requestUser(req,res)
 })
 
-app.post('/admin/ResquerAllUsers', (req,res,next) => {
+app.post('/admin/ResquerAllUsers',verificarToken,(req,res) => {
     requestAllUser(req,res)
 })
 
-app.delete('/admin/DeleteUser', (req, res, next) => {
+app.delete('/admin/DeleteUser',verificarToken, (req, res) => {
     deleteUser(req, res)
 });
 
-app.post('/admin/createAcount', (req,res,next) => {
+app.post('/admin/createAcount',verificarToken, (req,res) => {
     createUser(req,res)
 })
-app.put('/admin/updateUser', (req,res,next) => {
+app.put('/admin/updateUser',verificarToken, (req,res) => {
     updateUser(req,res)
 })
 /*
 products
 */
 
-app.post('/products/CreateProduct', (req,res,next) => {
+app.post('/products/CreateProduct', (req,res) => {
     createProduct(req,res)
 })
-app.put('/products/EditProduct', (req, res, next) => {
-    updateProduct(req, res); // Chama a função que você criou para atualizar o produto
+app.put('/products/EditProduct', (req, res) => {
+    updateProduct(req, res);
 });
-app.post('/products/RequestAllProducts', (req,res,next) => {
+app.post('/products/RequestAllProducts', (req,res) => {
     requestAllProduct(req,res)
 })
-app.post('/products/RequestProduct', (req,res,next) => {
+app.post('/products/RequestProduct', (req,res) => {
     requestProducts(req,res)
 })
-app.delete('/products/DeleteProduct', (req,res,next) => {
+app.delete('/products/DeleteProduct', (req,res) => {
     deleteProduct(req,res)
 })
 
@@ -83,19 +81,19 @@ app.delete('/products/DeleteProduct', (req,res,next) => {
 Teams
 */
 
-app.post('/admin/teams/AllTeams', (req,res,next) => {
+app.post('/admin/teams/AllTeams',verificarToken, (req,res) => {
     getAllTeams(req,res)
 })
-app.post('/admin/teams/CreateTeam', (req,res,next) => {
+app.post('/admin/teams/CreateTeam',verificarToken, (req,res) => {
     createTeam(req,res)
 })
-app.post('/admin/teams/FindTeam', (req,res,next) => {
+app.post('/admin/teams/FindTeam',verificarToken, (req,res) => {
     getTeamById(req,res)
 })  
-app.delete('/admin/teams/DeleteTeam', (req,res,next) => {
+app.delete('/admin/teams/DeleteTeam',verificarToken, (req,res) => {
     deleteTeam(req,res)
 })
-app.put('/admin/teams/EditTeam', (req,res,next) => {
+app.put('/admin/teams/EditTeam',verificarToken, (req,res) => {
     updateTeam(req,res)
 })
 
