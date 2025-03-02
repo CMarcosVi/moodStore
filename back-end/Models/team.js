@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
 import sequelize from './ConfingDb.js';
+import User from './Users.js';
 
 const Team = sequelize.define('Team', {
   id: {
@@ -18,34 +19,40 @@ const Team = sequelize.define('Team', {
   component1: {
     type: DataTypes.STRING,
     references: {
-      model: 'Users', // Tabela Users
-      key: 'name', // Chave estrangeira referencia o campo name
+      model: 'Users',
+      key: 'id_collaborator',
     },
   },
   component2: {
     type: DataTypes.STRING,
     references: {
       model: 'Users',
-      key: 'name',
+      key: 'id_collaborator',
     },
   },
   component3: {
     type: DataTypes.STRING,
     references: {
       model: 'Users',
-      key: 'name',
+      key: 'id_collaborator',
     },
   },
   component4: {
     type: DataTypes.STRING,
     references: {
       model: 'Users',
-      key: 'name',
+      key: 'id_collaborator',
     },
   },
 }, {
   tableName: 'Teams',
-  timestamps: false, // Caso não queira utilizar createdAt/updatedAt
+  timestamps: false,
 });
+
+// Definindo associações
+Team.belongsTo(User, { foreignKey: 'component1' });
+Team.belongsTo(User, { foreignKey: 'component2' });
+Team.belongsTo(User, { foreignKey: 'component3' });
+Team.belongsTo(User, { foreignKey: 'component4' });
 
 export default Team;

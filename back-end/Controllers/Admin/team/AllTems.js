@@ -1,4 +1,4 @@
-import Team from '../../../Models/team.js';
+import Team from '../../../Models/Team.js';
 // Obter todos os times
 const getAllTeams = async (req, res) => {
   try {

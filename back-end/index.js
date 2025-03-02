@@ -8,7 +8,7 @@ const port = 3000;
 import loginUser from './Controllers/User/LoginUser.js';
 import requestUser from './Controllers/Admin/RequestUser.js'
 import requestAllUser from './Controllers/Admin/ResquerAllUsers.js';
-import createUser from './Controllers/Admin/createUser.js';
+import createUser from './Controllers/Admin/CreateUser.js';
 import deleteUser from './Controllers/Admin/DeletUsar.js';
 import updateUser from './Controllers/Admin/EditUser.js';
 
@@ -19,13 +19,13 @@ import requestAllProduct from './Controllers/Products/RequestAllProducts.js';
 import requestProducts from './Controllers/Products/RequestProduct.js';
 import deleteProduct from './Controllers/Products/DeleteProducts.js';
 
-/*
-import createTeam from './Controllers/Admin/team/CreateTeam.js';
 import getAllTeams from './Controllers/Admin/team/AllTems.js';
+import getTeamById from './Controllers/Admin/team/FindTeam.js';
+import createTeam from './Controllers/Admin/team/CreateTeam.js';
 import deleteTeam from './Controllers/Admin/team/DeleteTeam.js';
 import updateTeam from './Controllers/Admin/team/EditTeam.js';
-import getTeamById from './Controllers/Admin/team/FindTeam.js';
-*/
+
+
 //import cookieParser from 'cookie-parser';
 //import verificarToken from './Middlewares/auth.js';
 
@@ -81,6 +81,7 @@ app.delete('/products/DeleteProduct', (req,res,next) => {
 
 /*
 Teams
+*/
 
 app.post('/admin/teams/AllTeams', (req,res,next) => {
     getAllTeams(req,res)
@@ -90,13 +91,13 @@ app.post('/admin/teams/CreateTeam', (req,res,next) => {
 })
 app.post('/admin/teams/FindTeam', (req,res,next) => {
     getTeamById(req,res)
-})
+})  
 app.delete('/admin/teams/DeleteTeam', (req,res,next) => {
     deleteTeam(req,res)
 })
 app.put('/admin/teams/EditTeam', (req,res,next) => {
     updateTeam(req,res)
 })
-*/
+
 
 app.listen(port)

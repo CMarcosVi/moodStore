@@ -1,9 +1,10 @@
-import Team from '../../../Models/team.js';
+import Team from '../../../Models/Team.js';
 
 const deleteTeam = async (req, res) => {
   try {
-    const { id } = req.body;
-    const team = await Team.findByPk(id);
+    const { nameTeam } = req.body;
+    console.log(nameTeam);
+    const team = await Team.findOne({where :{nameTeam}});
 
     if (team) {
       await team.destroy();
@@ -12,7 +13,7 @@ const deleteTeam = async (req, res) => {
       res.status(404).json({ message: 'Time não encontrado' });
     }
   } catch (error) {
-    res.status(400).json({ message: 'Erro ao excluir time', error });
+    res.status(400).json({ message: 'Erro ao excluir time', error: error });
   }
 };
 
