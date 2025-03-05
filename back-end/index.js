@@ -5,7 +5,6 @@ import bodyParser from 'body-parser';
 import { generalLimiter, generalLimiterProducts, generalLimiterAdmin } from './Middlewares/LimitedAcess.js'
 import verificarToken from './Middlewares/auth.js';
 import compression from 'compression';
-import xssClean from 'xss-clean';
 
 import cookieParser from 'cookie-parser';
 
@@ -17,7 +16,6 @@ const corsOptions = {
 };
 
 app.use(compression())
-app.use(xssClean());
 app.use(cors(corsOptions));
 app.use(helmet());
 app.use(bodyParser.json());
@@ -33,7 +31,6 @@ app.post('/loginUser', generalLimiter , async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
-
 app.post('/admin/FindUser',generalLimiterAdmin, verificarToken, async (req, res) => {
     try {
         const { default: requestUser } = await import('./Controllers/Admin/RequestUser.js');
@@ -81,9 +78,7 @@ app.put('/admin/updateUser',generalLimiterAdmin, verificarToken, async (req,res)
     }
 })
 
-/*
-products
-*/
+/*products*/
 app.post('/products/CreateProduct',generalLimiterProducts, async (req,res) => {
     try {
         const { default: createProduct } = await import('./Controllers/Products/CreateProducts.js');
@@ -130,9 +125,7 @@ app.delete('/products/DeleteProduct',generalLimiterProducts, async (req,res) => 
     }
 })
 
-/*
-Teams
-*/
+/*Teams*/
 app.post('/admin/teams/AllTeams',generalLimiterAdmin, verificarToken, async (req,res) => {
     try {
         const { default: getAllTeams } = await import('./Controllers/Admin/team/AllTems.js');
