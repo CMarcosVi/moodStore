@@ -5,7 +5,6 @@ import bodyParser from 'body-parser';
 
 const app = express();
 const port = 3000;
-import loginUser from './Controllers/User/LoginUser.js';
 import requestUser from './Controllers/Admin/RequestUser.js'
 import requestAllUser from './Controllers/Admin/ResquerAllUsers.js';
 import createUser from './Controllers/Admin/CreateUser.js';
@@ -35,9 +34,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-app.post('/loginUser', (req,res) => {
-    loginUser(req,res)
-})
+app.post('/loginUser', async (req, res) => { // make the route handler async
+    try {
+        const { default: loginUser } = await import('./Controllers/User/LoginUser.js');
+        loginUser(req, res);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 
 app.post('/admin/FindUser',verificarToken, (req,res,) => {
     requestUser(req,res)
