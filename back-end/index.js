@@ -6,6 +6,7 @@ import { generalLimiter, generalLimiterProducts, generalLimiterAdmin } from './M
 import verificarToken from './Middlewares/auth.js';
 import compression from 'compression';
 
+
 import cookieParser from 'cookie-parser';
 
 const app = express();
