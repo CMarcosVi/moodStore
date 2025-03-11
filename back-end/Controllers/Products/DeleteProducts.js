@@ -1,6 +1,6 @@
 
+import axios from "axios";
 import Product from "../../Models/Product.js";
-
 
 const deleteProduct = async (req, res) => {
     const { id_product } = req.body;
@@ -16,6 +16,12 @@ const deleteProduct = async (req, res) => {
         }
 
         await Products.destroy({where: {id_product}});
+
+        const externalUrl = 'http://127.0.0.1:5900'; // Substitua pela URL desejada
+        await axios.post(externalUrl, {
+            type: 'delete',
+            id_product: id_product,
+        });
         return res.status(200).json({ message: 'Excluido com sucesso' });
 
     } catch (error) {

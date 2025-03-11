@@ -1,3 +1,4 @@
+import axios from "axios";
 import Product from "../../Models/Product.js";
 
 const sanitizeInput = (input) => {
@@ -38,6 +39,14 @@ const createProduct = async (req, res) => {
             id_product: sanitized_id_product
         });
 
+        const urlAnalitcs = 'http://127.0.0.1:5900'
+
+        await axios.post(urlAnalitcs, {
+            type: 'create',
+            name: sanitized_name,
+            quantity: sanitized_quantity,
+            id_product: sanitized_id_product
+        })
         // Retornar uma resposta de sucesso
         return res.status(201).json({ message: 'Novo produto criado', Produto: createNewProduct });
 

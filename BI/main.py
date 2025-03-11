@@ -1,48 +1,48 @@
-# main.py
+import uvicorn
 from fastapi import FastAPI
-from pydantic import BaseModel
-
-# Criação da instância do FastAPI
-class product(BaseModel):
-    name: str
-    description: str = None
-    price: float
-    tax: float = None
-
-class user(BaseModel):
-    name: str
-    description: str = None
-    price: float
-    tax: float = None
-
-class team(BaseModel):
-    name: str
-    description: str = None
-    price: float
-    tax: float = None
-
+from Models.ProductModel import Product  # Corrigindo a importação
+import json
+import os
 
 app = FastAPI()
-# uvicorn main:app --reload  (iniciar api)
 
-# Definindo um endpoint simples para a raiz
-@app.post("/recoverValueProducts")
-def recover_products(product: product):
-    product_dict = product.model_dump()
-    product_dict["status"] = "Processed"
+# Caminho para armazenar os dados no arquivo JSON dentro da pasta Analytics
+json_file_path = "Analytics/analytics.json"
 
-    return {"processed_data": product_dict}
+# Função para carregar dados existentes no arquivo JSON
+def load_data():
+    try:
+        if os.path.exists(json_file_path):
+            with open(json_file_path, 'r') as file:
+                return json.load(file)
+        else:
+            return []  # Se o arquivo não existir, inicializa uma lista vazia
+    except Exception as e:
+        print(f"Erro ao carregar dados: {e}")
+        return []
 
-@app.post("/recoverValueUsers")
-def recover_users(users: user):
-    users_dict = product.model_dump()
-    users_dict["status"] = "Processed"
+# Função para salvar dados no arquivo JSON
+def save_data(data):
+    try:
+        # Cria a pasta Analytics se ela não existir
+        os.makedirs(os.path.dirname(json_file_path), exist_ok=True)
+        
+        with open(json_file_path, 'w') as file:
+            json.dump(data, file, indent=4)
+    except Exception as e:
+        print(f"Erro ao salvar dados: {e}")
 
-    return {"processed_data": users_dict}
+# Endpoint para receber todos os dados e apenas adicionar no JSON
+@app.post("/analytics")
+async def create_product(product: Product):
+    data = load_data()
 
-@app.post("/recoverValueTeams")
-def recover_teams(team: team):
-    team_dict = product.model_dump()
-    team_dict["status"] = "Processed"
+    # Adiciona o produto no arquivo JSON
+    data.append(product.dict())
+    save_data(data)
 
-    return {"processed_data": team_dict}
+    return {"message": "Produto adicionado com sucesso", "product": product}
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="127.0.0.1", port=5900)  # Defina a porta aqui
+    #http://127.0.0.1:5900
