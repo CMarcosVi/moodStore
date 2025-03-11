@@ -17,7 +17,7 @@ const deleteProduct = async (req, res) => {
 
         await Products.destroy({where: {id_product}});
 
-        const externalUrl = 'http://127.0.0.1:5900'; // Substitua pela URL desejada
+        const externalUrl = 'http://127.0.0.1:5900/analytics';
         await axios.post(externalUrl, {
             type: 'delete',
             id_product: id_product,

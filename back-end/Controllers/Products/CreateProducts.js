@@ -39,7 +39,7 @@ const createProduct = async (req, res) => {
             id_product: sanitized_id_product
         });
 
-        const urlAnalitcs = 'http://127.0.0.1:5900'
+        const urlAnalitcs = 'http://127.0.0.1:5900/analytics'
 
         await axios.post(urlAnalitcs, {
             type: 'create',

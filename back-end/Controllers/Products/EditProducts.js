@@ -1,3 +1,4 @@
+import axios from "axios";
 import Product from "../../Models/Product.js";
 
 const updateProduct = async (req, res) => {
@@ -16,7 +17,7 @@ const updateProduct = async (req, res) => {
 
             await product.save();
 
-            const externalUrl = 'http://127.0.0.1:5900';
+            const externalUrl = 'http://127.0.0.1:5900/analytics';
             await axios.post(externalUrl, {
                 type: 'edit',
                 id_product: product.id_product,
