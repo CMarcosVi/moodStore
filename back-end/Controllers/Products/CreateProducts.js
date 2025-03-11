@@ -1,5 +1,8 @@
 import axios from "axios";
 import Product from "../../Models/Product.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const sanitizeInput = (input) => {
     return input.trim().replace(/<[^>]*>/g, ''); 
@@ -50,6 +53,10 @@ const createProduct = async (req, res) => {
             quantity: sanitized_quantity,
             id_product: sanitized_id_product,
             created_at: currentDateTime
+        },{
+            headers: {
+                'X-API-Key': process.env.X_API_key,
+            }
         })
         // Retornar uma resposta de sucesso
         return res.status(201).json({ message: 'Novo produto criado', Produto: createNewProduct });

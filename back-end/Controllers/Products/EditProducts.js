@@ -1,5 +1,8 @@
 import axios from "axios";
 import Product from "../../Models/Product.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const getCurrentDateTime = () => {
     const date = new Date();
@@ -29,6 +32,10 @@ const updateProduct = async (req, res) => {
                 name: product.name,
                 quantity: product.quantity,
                 created_at: currentDateTime 
+            },{
+                headers: {
+                    'X-API-Key': process.env.X_API_key,
+                }
             });
             return res.status(200).json(product);
         } else {

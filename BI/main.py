@@ -1,13 +1,32 @@
-import uvicorn
-from fastapi import FastAPI
-from Models.ProductModel import Product  # Corrigindo a importação
+from fastapi import FastAPI, HTTPException, Depends
+from fastapi.security.api_key import APIKeyHeader
+from fastapi.middleware.cors import CORSMiddleware
 import json
 import os
+from Models.ProductModel import Product
+from datetime import datetime
 
+# Instanciando a API
 app = FastAPI()
+
+# Permitindo CORS para o domínio 'http://localhost:3000' (ou altere conforme necessário)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["POST"], 
+    allow_headers=["*"],
+)
 
 # Caminho para armazenar os dados no arquivo JSON dentro da pasta Analytics
 json_file_path = "Analytics/analytics.json"
+
+# Definir um nome para a chave de API
+API_KEY = "7f75e2d76e5e0afVae77b13b064bab57b3b690b3a0c051bce72434ca50186552"  # Altere com sua chave segura
+API_KEY_NAME = "X-API-Key"
+
+# Definindo a dependência para o cabeçalho da chave de API
+api_key_header = APIKeyHeader(name=API_KEY_NAME, auto_error=True)
 
 # Função para carregar dados existentes no arquivo JSON
 def load_data():
@@ -32,17 +51,27 @@ def save_data(data):
     except Exception as e:
         print(f"Erro ao salvar dados: {e}")
 
+# Função para verificar a chave de API
+def verify_api_key(api_key: str = Depends(api_key_header)):
+    if api_key != API_KEY:
+        raise HTTPException(status_code=403, detail="Invalid API Key")
+    return api_key
+
 # Endpoint para receber todos os dados e apenas adicionar no JSON
 @app.post("/analytics")
-async def create_product(product: Product):
+async def create_product(product: Product, api_key: str = Depends(verify_api_key)):
+    # Adiciona data e hora local ao produto
+    product_data = product.dict()
+    product_data['created_at'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
     data = load_data()
 
     # Adiciona o produto no arquivo JSON
-    data.append(product.dict())
+    data.append(product_data)
     save_data(data)
 
     return {"message": "Produto adicionado com sucesso", "product": product}
 
 if __name__ == "__main__":
+    import uvicorn
     uvicorn.run(app, host="127.0.0.1", port=5900)  # Defina a porta aqui
-    #http://127.0.0.1:5900

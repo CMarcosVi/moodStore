@@ -1,6 +1,9 @@
 
 import axios from "axios";
 import Product from "../../Models/Product.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const getCurrentDateTime = () => {
     const date = new Date();
@@ -27,6 +30,10 @@ const deleteProduct = async (req, res) => {
             type: 'delete',
             id_product: id_product,
             created_at: currentDateTime 
+        },{
+            headers: {
+                'X-API-Key': process.env.X_API_key,
+            }
         });
         return res.status(200).json({ message: 'Excluido com sucesso' });
 
