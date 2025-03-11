@@ -1,6 +1,10 @@
 import axios from "axios";
 import Product from "../../Models/Product.js";
 
+const getCurrentDateTime = () => {
+    const date = new Date();
+    return date.toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });  
+};
 const updateProduct = async (req, res) => {
     try {
         const { id_product, name, quantity } = req.body;
@@ -18,11 +22,13 @@ const updateProduct = async (req, res) => {
             await product.save();
 
             const externalUrl = 'http://127.0.0.1:5900/analytics';
+            const currentDateTime = getCurrentDateTime();
             await axios.post(externalUrl, {
                 type: 'edit',
                 id_product: product.id_product,
                 name: product.name,
-                quantity: product.quantity
+                quantity: product.quantity,
+                created_at: currentDateTime 
             });
             return res.status(200).json(product);
         } else {

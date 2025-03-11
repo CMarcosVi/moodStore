@@ -4,7 +4,10 @@ import Product from "../../Models/Product.js";
 const sanitizeInput = (input) => {
     return input.trim().replace(/<[^>]*>/g, ''); 
 };
-
+const getCurrentDateTime = () => {
+    const date = new Date();
+    return date.toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }); 
+};
 const createProduct = async (req, res) => {
     const { name, id_product, quantity } = req.body;
 
@@ -40,12 +43,13 @@ const createProduct = async (req, res) => {
         });
 
         const urlAnalitcs = 'http://127.0.0.1:5900/analytics'
-
+        const currentDateTime = getCurrentDateTime();
         await axios.post(urlAnalitcs, {
             type: 'create',
             name: sanitized_name,
             quantity: sanitized_quantity,
-            id_product: sanitized_id_product
+            id_product: sanitized_id_product,
+            created_at: currentDateTime
         })
         // Retornar uma resposta de sucesso
         return res.status(201).json({ message: 'Novo produto criado', Produto: createNewProduct });

@@ -2,6 +2,10 @@
 import axios from "axios";
 import Product from "../../Models/Product.js";
 
+const getCurrentDateTime = () => {
+    const date = new Date();
+    return date.toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }); 
+};
 const deleteProduct = async (req, res) => {
     const { id_product } = req.body;
 
@@ -18,9 +22,11 @@ const deleteProduct = async (req, res) => {
         await Products.destroy({where: {id_product}});
 
         const externalUrl = 'http://127.0.0.1:5900/analytics';
+        const currentDateTime = getCurrentDateTime();
         await axios.post(externalUrl, {
             type: 'delete',
             id_product: id_product,
+            created_at: currentDateTime 
         });
         return res.status(200).json({ message: 'Excluido com sucesso' });
 

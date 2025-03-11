@@ -6,6 +6,7 @@ class Product(BaseModel):
     name: str = None
     quantity: int = None
     id_product: int
+    created_at: str = None  
 
 
 
