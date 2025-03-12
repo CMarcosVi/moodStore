@@ -64,7 +64,7 @@ const createProduct = async (req, res) => {
 
         await producer.connect();
         await producer.send({
-            topic: 'analytics', // Tópico do Kafka para onde as mensagens serão enviadas
+            topic: 'product-events', // Tópico do Kafka para onde as mensagens serão enviadas
             messages: [
                 {
                     value: JSON.stringify({

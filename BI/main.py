@@ -3,10 +3,9 @@ from fastapi.security.api_key import APIKeyHeader
 from fastapi.middleware.cors import CORSMiddleware
 import json
 import os
-from Models.ProductModel import Product
-from datetime import datetime
 import asyncio
 from aiokafka import AIOKafkaConsumer
+from datetime import datetime
 
 # Instanciando a API
 app = FastAPI()
@@ -62,7 +61,7 @@ def verify_api_key(api_key: str = Depends(api_key_header)):
 # Função para consumir mensagens do Kafka
 async def consume_messages():
     consumer = AIOKafkaConsumer(
-        'analytics',  # Tópico Kafka
+        'product-events',  # Tópico Kafka
         bootstrap_servers='localhost:9092',  # Broker Kafka
         group_id='analytics-group'  # Grupo de consumidores
     )
@@ -75,9 +74,6 @@ async def consume_messages():
             # Aqui você pode processar a mensagem que chegou
             product_data = json.loads(message.value.decode('utf-8'))
             print(f"Mensagem recebida do Kafka: {product_data}")
-
-            # Adiciona data e hora local ao produto
-            product_data['created_at'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
             # Carregar dados existentes
             data = load_data()
@@ -105,5 +101,4 @@ if __name__ == "__main__":
     # Inicia o consumidor Kafka
     loop.create_task(consume_messages())
     
-    # Inicia o servidor FastAPI
     uvicorn.run(app, host="127.0.0.1", port=5900)

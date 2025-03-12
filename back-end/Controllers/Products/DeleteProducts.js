@@ -4,10 +4,10 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-// Configuração do Kafka
+
 const kafka = new Kafka({
     clientId: 'product-service',
-    brokers: ['localhost:9092'] // Seu broker Kafka
+    brokers: ['localhost:9092']
 });
 const producer = kafka.producer();
 
@@ -40,7 +40,8 @@ const deleteProduct = async (req, res) => {
                 {
                     value: JSON.stringify({
                         type: 'delete',
-                        id_product,
+                        name: product.name,
+                        id_product: product.id_product,
                         created_at: currentDateTime,
                     })
                 }
