@@ -1,8 +1,19 @@
 import axios from "axios";
 import Product from "../../Models/Product.js";
 import dotenv from "dotenv";
+import { Kafka } from 'kafkajs'; // Importando a biblioteca KafkaJS
+
 
 dotenv.config();
+
+// Configuração do Kafka
+const kafka = new Kafka({
+    clientId: 'my-app', // Nome do cliente Kafka
+    brokers: ['localhost:9092'], // Brokers do Kafka, pode ser ajustado conforme seu ambiente
+});
+
+const producer = kafka.producer(); // Instância do produtor Kafka
+
 
 const sanitizeInput = (input) => {
     return input.trim().replace(/<[^>]*>/g, ''); 
@@ -11,6 +22,7 @@ const getCurrentDateTime = () => {
     const date = new Date();
     return date.toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }); 
 };
+
 const createProduct = async (req, res) => {
     const { name, id_product, quantity } = req.body;
 
@@ -45,8 +57,27 @@ const createProduct = async (req, res) => {
             id_product: sanitized_id_product
         });
 
+        
+
         const urlAnalitcs = 'http://127.0.0.1:5900/analytics'
         const currentDateTime = getCurrentDateTime();
+
+        await producer.connect();
+        await producer.send({
+            topic: 'analytics', // Tópico do Kafka para onde as mensagens serão enviadas
+            messages: [
+                {
+                    value: JSON.stringify({
+                        type: 'create',
+                        name: sanitized_name,
+                        quantity: sanitized_quantity,
+                        id_product: sanitized_id_product,
+                        created_at: currentDateTime,
+                    }),
+                },
+            ],
+        });
+        await producer.disconnect();
         await axios.post(urlAnalitcs, {
             type: 'create',
             name: sanitized_name,

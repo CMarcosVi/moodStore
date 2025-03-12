@@ -1,2 +1,3 @@
 fastapi
 unicorn
+aiokafka

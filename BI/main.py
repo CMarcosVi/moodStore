@@ -5,6 +5,8 @@ import json
 import os
 from Models.ProductModel import Product
 from datetime import datetime
+import asyncio
+from aiokafka import AIOKafkaConsumer
 
 # Instanciando a API
 app = FastAPI()
@@ -14,7 +16,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000"],
     allow_credentials=True,
-    allow_methods=["POST"], 
+    allow_methods=["POST"],
     allow_headers=["*"],
 )
 
@@ -57,21 +59,51 @@ def verify_api_key(api_key: str = Depends(api_key_header)):
         raise HTTPException(status_code=403, detail="Invalid API Key")
     return api_key
 
-# Endpoint para receber todos os dados e apenas adicionar no JSON
-@app.post("/analytics")
-async def create_product(product: Product, api_key: str = Depends(verify_api_key)):
-    # Adiciona data e hora local ao produto
-    product_data = product.dict()
-    product_data['created_at'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+# Função para consumir mensagens do Kafka
+async def consume_messages():
+    consumer = AIOKafkaConsumer(
+        'analytics',  # Tópico Kafka
+        bootstrap_servers='localhost:9092',  # Broker Kafka
+        group_id='analytics-group'  # Grupo de consumidores
+    )
+    
+    # Conectar o consumidor
+    await consumer.start()
+    
+    try:
+        async for message in consumer:
+            # Aqui você pode processar a mensagem que chegou
+            product_data = json.loads(message.value.decode('utf-8'))
+            print(f"Mensagem recebida do Kafka: {product_data}")
 
-    data = load_data()
+            # Adiciona data e hora local ao produto
+            product_data['created_at'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-    # Adiciona o produto no arquivo JSON
-    data.append(product_data)
-    save_data(data)
+            # Carregar dados existentes
+            data = load_data()
 
-    return {"message": "Produto adicionado com sucesso", "product": product}
+            # Adiciona o novo produto no arquivo JSON
+            data.append(product_data)
 
+            # Salvar os dados de volta no arquivo JSON
+            save_data(data)
+
+    finally:
+        # Fechar o consumidor após terminar
+        await consumer.stop()
+
+# Rota inicial para verificar a aplicação
+@app.get("/")
+async def root():
+    return {"message": "API de Análise está funcionando!"}
+
+# Função principal de inicialização para iniciar o consumo de mensagens Kafka
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=5900)  # Defina a porta aqui
+    loop = asyncio.get_event_loop()
+    
+    # Inicia o consumidor Kafka
+    loop.create_task(consume_messages())
+    
+    # Inicia o servidor FastAPI
+    uvicorn.run(app, host="127.0.0.1", port=5900)
