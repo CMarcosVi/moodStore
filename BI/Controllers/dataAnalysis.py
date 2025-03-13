@@ -1,6 +1,7 @@
 import json
 from collections import defaultdict
 from datetime import datetime
+from pandas import pd
 
 # Caminho para o arquivo JSON
 json_file_path = "analytics_data.json"
@@ -61,6 +62,21 @@ def calculate_total_quantity(data, latest_edits):
         total_quantity += edit['quantity']
 
     return total_quantity
+
+def totalidade_request():
+       analitycs = pd.read_json("analytics_data.json")
+       num_objetos = len(analitycs)
+       num_registros = num_objetos
+       return num_registros
+
+def total_de_requisicao():
+    pd.read_json("analytics_data.json")
+    creates = len(analitycs[analitycs['type'] == 'create'])
+    edit = len(analitycs[analitycs['type'] == 'edit'])
+    delete = len(analitycs[analitycs['type'] == 'delete'])
+    totality = creates+edit+delete
+
+    return creates,edit,delete,totality
 
 # Função principal para processar os dados
 def process_data():

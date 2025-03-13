@@ -29,29 +29,6 @@ API_KEY_NAME = "X-API-Key"
 # Definindo a dependência para o cabeçalho da chave de API
 api_key_header = APIKeyHeader(name=API_KEY_NAME, auto_error=True)
 
-# Função para carregar dados existentes no arquivo JSON
-def load_data():
-    try:
-        if os.path.exists(json_file_path):
-            with open(json_file_path, 'r') as file:
-                return json.load(file)
-        else:
-            return []  # Se o arquivo não existir, inicializa uma lista vazia
-    except Exception as e:
-        print(f"Erro ao carregar dados: {e}")
-        return []
-
-# Função para salvar dados no arquivo JSON
-def save_data(data):
-    try:
-        # Cria a pasta Analytics se ela não existir
-        os.makedirs(os.path.dirname(json_file_path), exist_ok=True)
-        
-        with open(json_file_path, 'w') as file:
-            json.dump(data, file, indent=4)
-    except Exception as e:
-        print(f"Erro ao salvar dados: {e}")
-
 # Função para verificar a chave de API
 def verify_api_key(api_key: str = Depends(api_key_header)):
     if api_key != API_KEY:
