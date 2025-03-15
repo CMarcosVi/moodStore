@@ -64,7 +64,7 @@ def calculate_total_quantity(data, latest_edits):
     return total_quantity
 
 def totalidade_request():
-       
+    
        analitycs = pd.read_json("analytics_data.json")
        num_objetos = len(analitycs)
        num_registros = num_objetos

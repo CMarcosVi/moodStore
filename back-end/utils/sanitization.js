@@ -1,13 +1,17 @@
 const sanitizeName = (name) => {
-    const regex = /^[a-zA-ZÀ-ÖØ-öø-ÿ\s]+$/;
-    if (!regex.test(name)) {
-        throw new Error('Nome inválido. Apenas letras, acentos e espaços são permitidos.');
+    const str_transforme = String(name).trim();
+    const regex = /^[a-zA-ZÀ-ÖØ-öø-ÿ0-9\s]+$/;
+
+    if (!regex.test(str_transforme)) {
+        throw new Error('Nome inválido. Apenas letras, números, acentos e espaços são permitidos.');
     }
-    if (/<script.*?>.*?<\/script>/i.test(name)) {
+    if (/<script.*?>.*?<\/script>/i.test(str_transforme)) {
         throw new Error('Nome contém código de script inválido.');
     }
-    return name.trim();
+    return str_transforme;
 }
+
+
 
 
 const sanitizePassword = (password) => {
@@ -54,10 +58,27 @@ const sanitizeID = (id) => {
     return id;
 }
 
+const sanitizeNumber = (value) => {
+    const sanitizedValue = parseInt(value);
+    
+    if (isNaN(sanitizedValue)) {
+        throw new Error("Valor inválido, não é um número.");
+    }
+
+    if (!Number.isInteger(sanitizedValue)) {
+        console.warn("Valor não é inteiro, foi arredondado.");
+        sanitizedValue = Math.round(sanitizedValue);
+    }
+
+    return sanitizedValue;
+};
+
+
 export default {
     sanitizeName,
     sanitizePassword,
     sanitizeTextMessage,
     sanitizeEmail,
-    sanitizeID
+    sanitizeID,
+    sanitizeNumber
 }
