@@ -1,7 +1,8 @@
 import User from '../Models/Users.js';
+import cookieParser from 'cookie-parser';
 
 const verificarToken = async (req, res, next) => {
-    const token = '952e437ee9d5d365755c2cc360df6f29262041070eb54df5fa9688d570f36ca88ef434e08755b56acb24f6dddae73b30d9bd4d13b0fb3828252f65c2ea89a8bd';  // Obtém o token dos cookies
+    const token = req.cookies.token;  
 
     if (!token) {
         return res.redirect('/login');
