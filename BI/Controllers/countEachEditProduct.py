@@ -41,10 +41,3 @@ def calcular_ocorrencias_edit():
         print(f"Erro ao ler o arquivo JSON: {e}")
     except FileNotFoundError:
         print(f"O arquivo '{json_file_path}' não foi encontrado.")
-
-# Chamando a função principal e pegando as ocorrências do tipo 'edit' por produto
-ocorrencias_edit = calcular_ocorrencias_edit()
-
-# Exibindo as ocorrências de 'edit'
-print("\nContagem de ocorrências do tipo 'edit' por produto:")
-print(ocorrencias_edit)

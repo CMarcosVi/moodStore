@@ -34,10 +34,4 @@ def calcular_somas():
     except FileNotFoundError:
         print(f"O arquivo '{json_file_path}' não foi encontrado.")
 
-# Chamando a função e pegando os valores de retorno
-editados, criados, deletados = calcular_somas()
 
-# Exibindo os resultados após a chamada da função
-print(f"Total de Produtos Editados: {editados}")
-print(f"Total de Produtos Criados: {criados}")
-print(f"Total de Produtos Deletados: {deletados}")

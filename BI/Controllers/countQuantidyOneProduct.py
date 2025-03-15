@@ -37,8 +37,3 @@ def calcular_id_produto_maior_edit():
     except FileNotFoundError:
         print(f"O arquivo '{json_file_path}' não foi encontrado.")
 
-# Chamando a função principal e pegando o id_product com maior quantidade de "edit"
-id_produto_edit = calcular_id_produto_maior_edit()
-
-# Exibindo o id_product
-print(f"\nID do produto com maior quantidade 'edit': {id_produto_edit}")

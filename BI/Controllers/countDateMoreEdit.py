@@ -39,17 +39,10 @@ def calcular_dia_com_mais_edits():
 
         # Encontra o dia com mais edições
         dia_com_mais = dia_com_mais_edits(read_json)
-
         # Retornando o dia com mais edições
         return dia_com_mais
-
+    
     except ValueError as e:
         print(f"Erro ao ler o arquivo JSON: {e}")
     except FileNotFoundError:
         print(f"O arquivo '{json_file_path}' não foi encontrado.")
-
-# Chamando a função principal e pegando o dia com mais edições
-dia_com_mais = calcular_dia_com_mais_edits()
-
-# Exibindo o dia com mais edições
-print(f"\nDia com mais edições: {dia_com_mais['dia']} com {dia_com_mais['edicoes']} edições.")

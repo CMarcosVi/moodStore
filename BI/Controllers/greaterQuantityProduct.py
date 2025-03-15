@@ -41,10 +41,3 @@ def calcular_somas_e_maior_quantidade():
     except FileNotFoundError:
         print(f"O arquivo '{json_file_path}' não foi encontrado.")
 
-# Chamando a função principal e pegando os valores de retorno
-maior_edit, maior_create, maior_delete = calcular_somas_e_maior_quantidade()
-
-# Exibindo as quantidades para cada tipo
-print(f"\nMaior quantidade 'edit': {maior_edit}")
-print(f"Maior quantidade 'create': {maior_create}")
-print(f"Maior quantidade 'delete': {maior_delete}")

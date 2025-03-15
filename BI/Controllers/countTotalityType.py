@@ -14,6 +14,7 @@ def countTotalityType():
         print(f"Contagem de 'edit': {count_edit}")
         print(f"Contagem de 'create': {count_create}")
         print(f"Contagem de 'delete': {count_delete}")
+        return count_create,count_edit,count_delete
 
     except ValueError as e:
         print(f"Erro ao ler o arquivo JSON: {e}")
