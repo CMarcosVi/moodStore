@@ -1,10 +1,10 @@
 import json
 from collections import defaultdict
 from datetime import datetime
-from pandas import pd
+import pandas as pd
 
 # Caminho para o arquivo JSON
-json_file_path = "analytics_data.json"
+json_file_path = "../Analytics/analytics.json"
 
 # Função para carregar os dados do arquivo JSON
 def load_data():
@@ -37,7 +37,7 @@ def separate_types(data):
             # Processando o último edit para cada id_product
             if message_type == "edit":
                 id_product = item.get('id_product')
-                created_at = datetime.strptime(item.get('created_at'), "%Y-%m-%d %H:%M:%S")
+                created_at = datetime.strptime(item.get('create_at'), "%d/%m/%Y, %H:%M:%S")
 
                 # Se já existe um edit anterior para este id_product, comparamos pela data
                 if id_product not in latest_edits or latest_edits[id_product]['created_at'] < created_at:
@@ -64,20 +64,19 @@ def calculate_total_quantity(data, latest_edits):
     return total_quantity
 
 def totalidade_request():
-    
-       analitycs = pd.read_json("analytics_data.json")
-       num_objetos = len(analitycs)
-       num_registros = num_objetos
-       return num_registros
+    analitycs = pd.read_json("analytics_data.json")
+    num_objetos = len(analitycs)
+    num_registros = num_objetos
+    return num_registros
 
 def total_de_requisicao():
-    pd.read_json("analytics_data.json")
+    analitycs = pd.read_json("analytics_data.json")
     creates = len(analitycs[analitycs['type'] == 'create'])
     edit = len(analitycs[analitycs['type'] == 'edit'])
     delete = len(analitycs[analitycs['type'] == 'delete'])
-    totality = creates+edit+delete
+    totality = creates + edit + delete
 
-    return creates,edit,delete,totality
+    return creates, edit, delete, totality
 
 # Função principal para processar os dados
 def process_data():
