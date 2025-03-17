@@ -1,0 +1,14 @@
+from countDateMoreEdit import calcular_dia_com_mais_edits
+from countEachEditProduct import calcular_ocorrencias_edit
+from countQuantidyOneProduct import calcular_id_produto_maior_edit
+from countTotalityQuantidy import calcular_somas
+from countTotalityType import countTotalityType
+from greaterQuantityProduct import calcular_somas_e_maior_quantidade
+
+# Chama as funções e armazena os resultados, caso necessário
+calcular_dia_com_mais_edits()
+calcular_ocorrencias_edit()
+calcular_id_produto_maior_edit()
+calcular_somas()
+countTotalityType()
+calcular_somas_e_maior_quantidade()
