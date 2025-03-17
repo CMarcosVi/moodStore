@@ -14,20 +14,22 @@ const getCurrentDateTime = () => {
 
 const updateProduct = async (req, res) => {
     try {
-        const { id_product, name, quantity } = req.body;
+        const { id_product, name, quantity, price_for_unit } = req.body;
 
-        if (!id_product || !name || !quantity) {
+        if (!id_product || !name || !quantity || !price_for_unit) {
             return res.status(400).json({ error: "Campos obrigatórios faltando." });
         }
-        console.log(typeof name)
         const sanitization_id_product = sanitization.sanitizeID(id_product);
         const product = await Product.findOne({ where: { id_product:sanitization_id_product } });
 
         if (product) {
             const sanitization_name = sanitization.sanitizeName(name);
             const sanitization_quantity = sanitization.sanitizeName(quantity);
+            const sanitization_price_product = sanitization.sanitizeFloat(price_for_unit);
+
             product.name = sanitization_name;
-            product.quantity = sanitization_quantity;  
+            product.quantity = sanitization_quantity;
+            product.price_for_unit = sanitization_price_product;
 
             await product.save();
             
@@ -39,6 +41,7 @@ const updateProduct = async (req, res) => {
                 name: product.name,
                 quantity: product.quantity,
                 id_product: product.id_product,
+                price_product: sanitization_price_product,
                 created_at: currentDateTime
             },{
                 headers: {

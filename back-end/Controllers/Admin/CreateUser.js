@@ -4,9 +4,9 @@ import bcrypt from 'bcrypt';
 import sanitization from "../../utils/sanitization.js";
 
 const createUser = async (req, res) => {
-    const { name, access, email, password, id_collaborator, type_user } = req.body;
+    const { name, access, email, password, id_collaborator, type_user,wage, position } = req.body;
 
-    if (!name || !access || !email || !password || !id_collaborator || !type_user) {
+    if (!name || !access || !email || !password || !id_collaborator || !type_user || !wage || !position) {
         return res.status(400).json({ erro: 'Campos obrigatórios ausentes.' });
     }
 
@@ -17,6 +17,8 @@ const createUser = async (req, res) => {
         const sanitized_password = sanitization.sanitizePassword(password);
         const sanitized_id_collaborator = parseInt(id_collaborator, 10);
         const sanitized_type_user = sanitization.sanitizeName(type_user);
+        const sanitized_wage = sanitization.sanitizeTextMessage(wage)
+        const sanitized_position = sanitization.sanitizeTextMessage(position)
 
         if (!['user', 'admin'].includes(sanitized_type_user)) {
             return res.status(400).json({ error: 'O tipo de usuário deve ser "user" ou "admin".' });
@@ -46,7 +48,9 @@ const createUser = async (req, res) => {
             email: sanitized_email,
             password: hashedPassword,
             id_collaborator: sanitized_id_collaborator,
-            type_user: sanitized_type_user
+            type_user: sanitized_type_user,
+            wage: sanitized_wage,
+            position: sanitized_position,
         });
 
         return res.status(201).json({ message: 'Usuário criado com sucesso!', user: newUserCreate });

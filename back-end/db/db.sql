@@ -6,12 +6,14 @@ USE enmp;
 CREATE TABLE Users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,  -- Nome do usuário
-    access VARCHAR(100) NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
+    access VARCHAR(20) NOT NULL UNIQUE,
+    email VARCHAR(60) UNIQUE NOT NULL UNIQUE,
+    password VARCHAR(25) NOT NULL,
     id_collaborator INT NOT NULL UNIQUE,  -- Definindo 'id_collaborator' como único
-    token VARCHAR(255),  -- Maior tamanho para tokens
-    type_user ENUM('user', 'admin') NOT NULL
+    token VARCHAR(255) UNIQUE,  -- Maior tamanho para tokens
+    type_user ENUM('user', 'admin') NOT NULL,
+    wage FLOAT NOT NULL,
+    position VARCHAR(255) NOT NULL,
 );
 
 -- Tabela Products
@@ -19,7 +21,8 @@ CREATE TABLE Products (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     quantity INT NOT NULL,
-    id_product INT UNIQUE NOT NULL  -- id_product único
+    id_product INT UNIQUE NOT NULL.  -- id_product único
+    price_for_unit INT NOT NULL
 );
 
 -- Tabela Teams
