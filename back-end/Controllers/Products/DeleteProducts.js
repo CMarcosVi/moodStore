@@ -29,6 +29,7 @@ const deleteProduct = async (req, res) => {
         // Sanitizando os dados do produto
         const sanitized_name = sanitization.sanitizeName(product.name);  // Sanitizando o nome
         const sanitized_quantity = sanitization.sanitizeID(product.quantity); // Sanitizando a quantidade
+        const sanitized_price_for_unit = sanitization.price_for_unit(product.price_for_unit); // Sanitizando a quantidade
 
         // Excluindo o produto do banco de dados
         await product.destroy();
@@ -42,7 +43,8 @@ const deleteProduct = async (req, res) => {
             type: 'delete', // Alterando para 'delete' já que o produto está sendo excluído
             name: sanitized_name,
             quantity: sanitized_quantity,
-            id_product: sanitized_id_product_initial,  // Usando o ID sanitizado
+            id_product: sanitized_id_product_initial,
+            price_for_unit: sanitized_price_for_unit,  // Usando o ID sanitizado
             deleted_at: currentDateTime,  // Alterando o campo para 'deleted_at'
         }, {
             headers: {

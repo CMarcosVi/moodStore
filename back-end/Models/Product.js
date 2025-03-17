@@ -20,6 +20,10 @@ const Product = sequelize.define('Products', {
        allowNull: false,
        unique: true,
    },
+   price_for_unit: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+},
 }, {
    tableName: 'Products',  // Corrigido de 'Users' para 'Products'
    timestamps: false, // Desativa os campos createdAt e updatedAt, caso não queira usá-los

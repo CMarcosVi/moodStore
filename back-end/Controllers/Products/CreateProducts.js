@@ -15,9 +15,9 @@ const getCurrentDateTime = () => {
 };
 
 const createProduct = async (req, res) => {
-    const { name, id_product, quantity } = req.body;
+    const { name, id_product, quantity,price_for_unit } = req.body;
 
-    if (!name || !quantity || !id_product) {
+    if (!name || !quantity || !id_product || !price_for_unit) {
         return res.status(400).json({ error: "Todos os campos são obrigatórios", product: req.body });
     }
 
@@ -25,6 +25,7 @@ const createProduct = async (req, res) => {
         const sanitized_name = sanitization.sanitizeName(name);
         const sanitization_quantity = sanitization.sanitizeNumber(quantity)
         const sanitization_id_product = sanitization.sanitizeNumber(id_product)
+        const sanitization_price_product = sanitization.sanitizeFloat(price_for_unit)
 
         const existingProduct = await Product.findOne({ where: { id_product: sanitization_id_product } });
 
@@ -35,7 +36,8 @@ const createProduct = async (req, res) => {
         const createNewProduct = await Product.create({
             name: sanitized_name,
             quantity: sanitization_quantity,
-            id_product: sanitization_id_product
+            id_product: sanitization_id_product,
+            price_for_unit: sanitization_price_product
         });
 
         // até aqui tudo bem
@@ -51,6 +53,7 @@ const createProduct = async (req, res) => {
             name: sanitized_name,
             quantity: sanitization_quantity,
             id_product: sanitization_id_product,
+            price_for_unit: sanitization_price_product,
             created_at: currentDateTime
         }, {
             headers: {

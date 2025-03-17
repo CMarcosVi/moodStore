@@ -33,8 +33,16 @@ const User = sequelize.define('User', {
        allowNull: false,
    },
    token: {
-    type: DataTypes.STRING,
-    allowNull: true,
+        type: DataTypes.STRING,
+        allowNull: true,
+   },
+   wage:{
+        type: DataTypes.FLOAT,
+        allowNull: true,
+   },
+   position:{
+        type: DataTypes.STRING,
+        allowNull: true,
    }
 }, {
    tableName: 'Users',

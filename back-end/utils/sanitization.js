@@ -11,7 +11,13 @@ const sanitizeName = (name) => {
     return str_transforme;
 }
 
-
+function sanitizeFloat(value) {
+    const floatValue = parseFloat(value);
+    if (isNaN(floatValue)) {
+        return null;
+    }
+    return floatValue;
+}
 
 
 const sanitizePassword = (password) => {
@@ -80,5 +86,6 @@ export default {
     sanitizeTextMessage,
     sanitizeEmail,
     sanitizeID,
-    sanitizeNumber
+    sanitizeNumber,
+    sanitizeFloat
 }
