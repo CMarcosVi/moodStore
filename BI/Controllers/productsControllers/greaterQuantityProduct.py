@@ -16,7 +16,7 @@ def maior_quantidade_por_tipo(df, tipo):
 # Função para calcular as somas das quantidades por tipo e encontrar o produto com maior quantidade
 def calcular_somas_e_maior_quantidade():
     # Caminho do arquivo JSON
-    json_file_path = "../../Analytics/analytics.json"
+    json_file_path = "../Analytics/analytics.json"
 
     # Lê o arquivo JSON usando pandas
     try:

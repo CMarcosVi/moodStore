@@ -30,7 +30,7 @@ def dia_com_mais_edits(df):
 # Função para calcular o dia com mais edições
 def calcular_dia_com_mais_edits():
     # Caminho do arquivo JSON
-    json_file_path = "../../Analytics/analytics.json"
+    json_file_path = "../Analytics/analytics.json"
 
     # Lê o arquivo JSON usando pandas
     try:

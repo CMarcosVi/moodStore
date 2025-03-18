@@ -20,7 +20,7 @@ def contar_ocorrencias_edit(df):
 # Função para calcular as ocorrências do tipo 'edit' para cada produto
 def calcular_ocorrencias_edit():
     # Caminho do arquivo JSON
-    json_file_path = "../../Analytics/analytics.json"
+    json_file_path = "../Analytics/analytics.json"
 
     # Lê o arquivo JSON usando pandas
     try:
