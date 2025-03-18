@@ -35,7 +35,7 @@ def gerar_relatorio_pdf(salarios_por_cargo, soma_total, quantidade_total, quanti
 
     # Adicionando a soma total dos salários
     c.setFont("Helvetica-Bold", 12)
-    c.drawString(100, y - 20, f"Soma total de todos os salários: R$ {soma_total:.2f}")
+    c.drawString(100, y - 20, f"Soma total a ser Pago: R$ {soma_total:.2f}")
     y -= 20  # Mais espaço após a soma total dos salários
     
     # Aumentando mais o espaçamento antes da próxima seção
@@ -43,7 +43,7 @@ def gerar_relatorio_pdf(salarios_por_cargo, soma_total, quantidade_total, quanti
     
     # Adicionando cabeçalhos da tabela de quantidade de posições
     c.setFont("Helvetica-Bold", 12)
-    c.drawString(100, y - 20, "Quantidade de Posições")
+    c.drawString(100, y - 20, "Colaboradores")
     y -= 40  # Dando espaço entre o cabeçalho e os valores
     
     # Adicionando dados das quantidades de posições
@@ -54,7 +54,6 @@ def gerar_relatorio_pdf(salarios_por_cargo, soma_total, quantidade_total, quanti
     
     # Adicionando a quantidade total de objetos
     c.setFont("Helvetica-Bold", 12)
-    c.drawString(100, y - 20, f"Quantidade total de objetos no JSON: {quantidade_total}")
     
     # Salvando o PDF
     c.save()

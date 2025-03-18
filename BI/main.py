@@ -125,7 +125,7 @@ def schedule_report_generation():
     scheduler = BackgroundScheduler()
 
     # Agendar a execução a cada 30 dias (em segundos)
-    scheduler.add_job(run_report_script, IntervalTrigger(days=30), id='generate_report', replace_existing=True)
+    scheduler.add_job(run_report_script, IntervalTrigger(seconds=2), id='generate_report', replace_existing=True)
 
     # Iniciar o agendador
     scheduler.start()
