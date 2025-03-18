@@ -72,4 +72,4 @@ def gerar_relatorio(nome_arquivo_json):
 
 # Chamar a função principal
 if __name__ == "__main__":
-    gerar_relatorio('../Analytics/personAnalytics.json')  # Ajuste o caminho conforme necessário
+    gerar_relatorio('Analytics/personAnalytics.json')  # Ajuste o caminho conforme necessário

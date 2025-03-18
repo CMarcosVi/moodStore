@@ -1,11 +1,16 @@
+import os
+import json
+import asyncio
+import subprocess
+from datetime import datetime
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.security.api_key import APIKeyHeader
 from fastapi.middleware.cors import CORSMiddleware
-from datetime import datetime
-import json
-import os
-import asyncio
+from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.triggers.interval import IntervalTrigger
 from pydantic import BaseModel
+import sys
+import threading
 
 # Instanciando a API
 app = FastAPI()
@@ -106,7 +111,34 @@ async def create_person(person: Person):
 
     return {"message": "Pessoa adicionada com sucesso", "person": person}
 
+# Função para executar o script relatoryGenerator.py
+def run_report_script():
+    try:
+        # Executa o script relatoryGenerator.py
+        subprocess.run(["python", "Controllers/personControllers/relatoryGenerator/relatoryGenerator.py"], check=True)
+        print("Relatório gerado com sucesso!")
+    except subprocess.CalledProcessError as e:
+        print(f"Erro ao gerar o relatório: {e}")
+
+# Função para agendar a execução do script relatoryGenerator.py a cada 30 dias
+def schedule_report_generation():
+    scheduler = BackgroundScheduler()
+
+    # Agendar a execução a cada 30 dias (em segundos)
+    scheduler.add_job(run_report_script, IntervalTrigger(days=30), id='generate_report', replace_existing=True)
+
+    # Iniciar o agendador
+    scheduler.start()
+
+# Executando o agendador em segundo plano
+def start_scheduler():
+    thread = threading.Thread(target=schedule_report_generation)
+    thread.daemon = True  # Torna o thread um daemon para ser encerrado quando o processo principal for encerrado
+    thread.start()
+
+# Iniciar o agendador antes de iniciar o servidor FastAPI
+start_scheduler()
+
 if __name__ == "__main__":
     import uvicorn
-    loop = asyncio.get_event_loop()
     uvicorn.run(app, host="127.0.0.1", port=5900)
