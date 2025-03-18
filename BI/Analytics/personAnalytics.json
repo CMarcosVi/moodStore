@@ -16,6 +16,14 @@
     },
     {
         "type": "create",
+        "name": "Zilean",
+        "id_collaborator": 193,
+        "wage": 4200,
+        "position": "Dev JR Web"
+        
+    },
+    {
+        "type": "create",
         "name": "Hian",
         "id_collaborator": 112,
         "wage": 7200,
