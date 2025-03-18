@@ -4,7 +4,7 @@ import pandas as pd
 # Função para calcular as somas de cada tipo
 def calcular_somas():
     # Caminho do arquivo JSON
-    json_file_path = "../Analytics/analytics.json"
+    json_file_path = "../../Analytics/analytics.json"
 
     # Lê o arquivo JSON usando pandas
     try:

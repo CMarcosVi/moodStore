@@ -1,0 +1,33 @@
+[
+    {
+        "type": "create",
+        "name": "Anderson",
+        "id_collaborator": 231,
+        "wage": 2250,
+        "position": "estagiario Web"
+    },
+    {
+        "type": "create",
+        "name": "Jonatan",
+        "id_collaborator": 192,
+        "wage": 4200,
+        "position": "Dev JR Web"
+        
+    },
+    {
+        "type": "create",
+        "name": "Hian",
+        "id_collaborator": 112,
+        "wage": 7200,
+        "position": "Dev Pl Web"
+        
+    },
+    {
+        "type": "create",
+        "name": "Endian",
+        "id_collaborator": 12,
+        "wage": 12500,
+        "position": "Dev Sr Web"
+        
+    }
+]

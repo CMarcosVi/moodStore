@@ -16,7 +16,7 @@ def id_produto_com_maior_quantidade_edit(df):
 # Função para calcular e obter o id_product com a maior quantidade "edit"
 def calcular_id_produto_maior_edit():
     # Caminho do arquivo JSON
-    json_file_path = "../Analytics/analytics.json"
+    json_file_path = "../../Analytics/analytics.json"
 
     # Lê o arquivo JSON usando pandas
     try:

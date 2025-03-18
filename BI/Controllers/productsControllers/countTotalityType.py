@@ -1,7 +1,7 @@
 import json
 import pandas as pd
 
-json_file_path = "../Analytics/analytics.json"
+json_file_path = "../../Analytics/analytics.json"
 
 # Até aqui tudo bem 
 def countTotalityType():
