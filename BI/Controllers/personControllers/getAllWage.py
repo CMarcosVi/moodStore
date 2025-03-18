@@ -1,23 +1,30 @@
-import pandas as pd
+import json
 
 def processar_json(nome_arquivo):
-    # Carregando os dados JSON em um DataFrame
-    df = pd.read_json(nome_arquivo)
+    # Abrindo o arquivo JSON
+    with open(nome_arquivo, 'r') as f:
+        dados = json.load(f)
 
-    # Agrupando os dados por cargo e somando os salários
-    soma_por_cargo = df.groupby('position').agg(
-        total_salario=('wage', 'sum'),
-        nomes_colaboradores=('name', lambda x: ', '.join(x))
-    )
+    # Inicializando um dicionário para armazenar a soma dos salários por cargo
+    salarios_por_cargo = {}
+    soma_total = 0
 
-    # Calculando a soma total de salários
-    soma_total = df['wage'].sum()
+    # Iterando sobre os dados para calcular as somas
+    for colaborador in dados:
+        cargo = colaborador['position']
+        salario = colaborador['wage']
+        
+        # Acumulando o salário por cargo
+        if cargo in salarios_por_cargo:
+            salarios_por_cargo[cargo] += salario
+        else:
+            salarios_por_cargo[cargo] = salario
+        
+        # Acumulando a soma total dos salários
+        soma_total += salario
 
-    # Exibindo os resultados
-    print("Soma dos salários por cargo e nomes dos colaboradores:")
-    print(soma_por_cargo)
-
-    print(f"\nSoma total de todos os salários: R$ {soma_total:.2f}")
+    # Retornando os resultados
+    return salarios_por_cargo, soma_total
 
 # Chamada da função com o nome do arquivo
-processar_json('../Analytics/personAnalytics.json')
+# processar_json('../../Analytics/personAnalytics.json') # Esta linha não será necessária no relatoryGenerator.py

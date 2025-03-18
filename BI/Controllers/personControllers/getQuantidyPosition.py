@@ -1,3 +1,4 @@
+
 import pandas as pd
 
 def processar_json(nome_arquivo):
@@ -15,6 +16,6 @@ def processar_json(nome_arquivo):
     
     print("\nQuantidade de cada tipo de position:")
     print(quantidade_positions)
+    return quantidade_total, quantidade_positions
 
 # Chamada da função com o nome do arquivo
-processar_json('../Analytics/personAnalytics.json')

@@ -1,3 +1,5 @@
 fastapi
 unicorn
 aiokafka
+pandas
+reportlab
