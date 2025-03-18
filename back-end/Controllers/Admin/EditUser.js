@@ -1,3 +1,4 @@
+// concertar
 import { Op } from 'sequelize'; // Importando o Op do Sequelize
 import User from "../../Models/Users.js";
 import Team from "../../Models/Team.js";
@@ -51,7 +52,23 @@ const deleteUser = async (req, res) => {
                 }
             }
         );
+        const urlAnalitcs = 'http://127.0.0.1:5900/analytics';
 
+        const response = await axios.post(urlAnalitcs, {
+            type: 'edit',
+            name: sanitized_name,
+            id_collaborator: sanitized_id_collaborator,
+            wage: sanitized_wage,
+            position: sanitized_position
+        }, {
+            headers: {
+                'X-API-Key': process.env.X_API_key,  // A chave da API
+            }
+        });
+        // Verificar a resposta da API de Analytics
+        if (response.status !== 200) {
+            return res.status(500).json({ error: 'Falha ao registrar dados de analytics', details: response.data });
+        }
         // Deletar o usuário da tabela User
         await User.destroy({ where: { id_collaborator } });
 

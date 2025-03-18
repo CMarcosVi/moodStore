@@ -43,9 +43,7 @@ const createProduct = async (req, res) => {
         // até aqui tudo bem
 
         const urlAnalitcs = 'http://127.0.0.1:5900/analytics';
-        console.log('até aqui suave');
         const currentDateTime = getCurrentDateTime();
-        console.log('até aqui suave2');
 
         // Enviar os dados para o endpoint de Analytics
         const response = await axios.post(urlAnalitcs, {
