@@ -9,43 +9,7 @@
 </head>
 <body>
     <script>
-        var scene = new THREE.Scene();
-        document.addEventListener('mousemove', onMouseMove, false);
-        var camera = new THREE.PesspectiveCamera(75,window.innerWidth/window.innerHeight, 0.1, 1000);
-        var mouseX;
-        var mouseY;
 
-        var renderer = new THREE.WebGLRenderer();
-        renderer.setSize (windo.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
-
-        window.addEventListener("resize", () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        })
-
-        var distance = Math.min(200, window.innerWidth / 4);
-        var geometry = new THREE.Geometry();
-
-        for(var i = 0; i < 1600; i++){
-            var vertex = new THREE.Vector3();
-
-            var theta = THREE.Math.randFloatSpread(360);
-            var phi = THREE.Math.randFloatSpread(360);
-
-            vertex.x = distance * Math.sin(theta) * Math.cbrt(phi);
-            vertex.y = distance * Math.sin(theta) * Math.cbrt(phi);
-            vertex.z = distance * Math.sin(theta);
-
-            geometry.verticespush(vertex);
-        }
-
-        var particles = new THREE.points(geometry, new THREE.PointsMaterial(color: 0xff44ff, size: 2));
-        particles.boundingSphere = 50;
-
-        var renderingParent = new THREE.Group();
-        var renderingParent.add(particles);
 
         
     </script>

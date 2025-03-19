@@ -64,10 +64,19 @@ def gerar_relatorio(nome_arquivo_json):
     salarios_por_cargo, soma_total = processar_salarios(nome_arquivo_json)
     quantidade_total, quantidade_positions = processar_posicoes(nome_arquivo_json)
     
-    # Gerar o relatório em PDF
-    gerar_relatorio_pdf(salarios_por_cargo, soma_total, quantidade_total, quantidade_positions, "relatorio_colaboradores_salarios_posicoes.pdf")
+    # Definindo o caminho da pasta Relatorio (que está no mesmo nível que a pasta Controllers)
+    pasta_destino = os.path.join(os.path.dirname(__file__), '..', '..','..', 'Relatorio')
     
-    print("Relatório PDF gerado com sucesso!")
+    # Cria a pasta de destino, se não existir
+    os.makedirs(pasta_destino, exist_ok=True)
+    
+    # Caminho completo para o arquivo PDF (pasta Relatorio + nome do arquivo)
+    nome_arquivo_pdf = os.path.join(pasta_destino, "relatorio_colaboradores_salarios_posicoes.pdf")
+    
+    # Gerar o relatório em PDF
+    gerar_relatorio_pdf(salarios_por_cargo, soma_total, quantidade_total, quantidade_positions, nome_arquivo_pdf)
+    
+    print(f"Relatório PDF gerado com sucesso em {nome_arquivo_pdf}!")
 
 # Chamar a função principal
 if __name__ == "__main__":
