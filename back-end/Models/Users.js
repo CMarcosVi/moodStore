@@ -19,9 +19,12 @@ const User = sequelize.define('User', {
        type: DataTypes.STRING,
        allowNull: false,
        unique: true,
+       validate: {
+           isEmail: true, // Ensures the email is in the correct format
+       },
    },
    password: {
-       type: DataTypes.STRING,
+       type: DataTypes.STRING(128),  // Specifies a max length for password
        allowNull: false,
    },
    id_collaborator: {
@@ -35,20 +38,23 @@ const User = sequelize.define('User', {
    token: {
         type: DataTypes.STRING,
         allowNull: true,
+        defaultValue: null,
    },
-   wage:{
-        type: DataTypes.FLOAT,
+   wage: {
+        type: DataTypes.DECIMAL(10, 2), // For monetary precision
         allowNull: true,
    },
-   position:{
+   position: {
         type: DataTypes.STRING,
         allowNull: true,
    }
 }, {
    tableName: 'Users',
-   timestamps: false, // Desativa os campos createdAt e updatedAt, caso não queira usá-los
+   timestamps: false, // Disables createdAt and updatedAt fields
+   indexes: [
+       { unique: true, fields: ['email'] },
+       { fields: ['id_collaborator'] },
+   ],
 });
 
-
-
- export default User;
+export default User;

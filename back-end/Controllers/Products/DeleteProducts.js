@@ -26,10 +26,10 @@ const deleteProduct = async (req, res) => {
             return res.status(400).json({ error: 'Produto não encontrado' });
         }
 
-        // Sanitizando os dados do produto
-        const sanitized_name = sanitization.sanitizeName(product.name);  // Sanitizando o nome
-        const sanitized_quantity = sanitization.sanitizeID(product.quantity); // Sanitizando a quantidade
-        const sanitized_price_for_unit = sanitization.price_for_unit(product.price_for_unit); // Sanitizando a quantidade
+        // Sanitizing other fields from the product before sending to analytics
+        const sanitized_name = sanitization.sanitizeName(product.name);
+        const sanitized_quantity = sanitization.sanitizeNumber(product.quantity);
+        const sanitized_price_for_unit = sanitization.sanitizeNumber(product.price_for_unit);
 
         // Excluindo o produto do banco de dados
         await product.destroy();
@@ -40,7 +40,7 @@ const deleteProduct = async (req, res) => {
         // Enviar dados de analytics
         const urlAnalitcs = 'http://127.0.0.1:5900/analytics';
         await axios.post(urlAnalitcs, {
-            type: 'delete', // Alterando para 'delete' já que o produto está sendo excluído
+            type: 'delete',  // Alterando para 'delete' já que o produto está sendo excluído
             name: sanitized_name,
             quantity: sanitized_quantity,
             id_product: sanitized_id_product_initial,
@@ -48,7 +48,7 @@ const deleteProduct = async (req, res) => {
             deleted_at: currentDateTime,  // Alterando o campo para 'deleted_at'
         }, {
             headers: {
-                'X-API-Key': process.env.X_API_key, // A chave da API
+                'X-API-Key': process.env.X_API_key,  // A chave da API
             }
         });
 

@@ -3,7 +3,7 @@
         "type": "create",
         "name": "Anderson",
         "id_collaborator": 231,
-        "wage": 2250,
+        "wage": 1000,
         "position": "estagiario Web"
     },
     {
@@ -36,6 +36,5 @@
         "id_collaborator": 12,
         "wage": 12500,
         "position": "Dev Sr Web"
-        
     }
 ]

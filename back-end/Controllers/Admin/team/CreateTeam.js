@@ -1,4 +1,6 @@
+import { where } from 'sequelize';
 import Team from '../../../Models/Team.js';
+import User from '../../../Models/Users.js'; // Importando o modelo User para validação
 
 const createTeam = async (req, res) => {
   try {
@@ -15,13 +17,28 @@ const createTeam = async (req, res) => {
       component4: component4 || null, // Se component4 estiver vazio, define como null
     };
 
+    // Verificar se o time já existe
+    const teamExist = await Team.findOne({ where: { nameTeam } });
+    if (teamExist) {
+      return res.status(400).json({ error: 'Time já existente.' });
+    }
+
+    // Verificar se todos os componentes são usuários válidos
+    const components = [component1, component2, component3, component4];
+    for (const component of components) {
+      if (component && !await User.findOne({ where: { id_collaborator: component } })) {
+        return res.status(400).json({ error: `O componente com ID ${component} não é um usuário válido.` });
+      }
+    }
+
     // Criar o time no banco de dados
     const team = await Team.create(teamData);
 
     // Responder com o time criado
     res.status(201).json(team);
   } catch (error) {
-    res.status(400).json({ message: 'Erro ao criar time', error });
+    console.error('Erro ao criar time:', error);
+    res.status(400).json({ message: 'Erro ao criar time', error: error.message });
   }
 };
 

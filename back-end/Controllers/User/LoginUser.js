@@ -23,12 +23,16 @@ const loginUser = async (req, res) => {
         }
 
         // Comparar a senha fornecida com a senha armazenada (criptografada)
-        const isPasswordValid = await bcrypt.compare(passwordSanitized, user.password);
+        //const isPasswordValid = await bcrypt.compare(passwordSanitized, user.password);
 
-        if (!isPasswordValid) {
-            return res.status(400).json({ error: 'Senha inválida' });
+        //if (!isPasswordValid) {
+          //  return res.status(400).json({ error: 'Senha inválida' });
+        //}
+        if(!(passwordSanitized  === user.password) ){
+            res.status(400).json({
+                error: 'jsson'
+            })
         }
-
         // Gerar um token único e seguro
         const token = crypto.randomBytes(64).toString('hex');
 
