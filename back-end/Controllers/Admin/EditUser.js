@@ -91,7 +91,7 @@ const updateUser = async (req, res) => {
         }
 
         // Enviar os dados para a API de Analytics
-        const urlAnalitcs = 'http://127.0.0.1:5900/analytics';
+        const urlAnalitcs = 'http://127.0.0.1:5900/analyticsPerson';
         let analyticsMessage = 'Usuário atualizado com sucesso, mas não foi possível enviar os dados para a API de Analytics.';
 
         try {

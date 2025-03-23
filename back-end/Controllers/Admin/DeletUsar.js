@@ -51,28 +51,32 @@ const deleteUser = async (req, res) => {
             );
         }
 
-        /* Enviar dados para a API de analytics
-        const urlAnalitcs = 'http://127.0.0.1:5900/analytics';
-        const response = await axios.post(urlAnalitcs, {
-            type: 'delete',
-            id_collaborator: user.id_collaborator,  // Alterado para id_collaborator
-            name: user.name,  // nome do usuário
-            wage: user.wage,
-            position: user.position
-        }, {
-            headers: {
-                'X-API-Key': process.env.X_API_key,  // A chave da API
-            }
-        });
-        
-        // Verificar a resposta da API de Analytics
-        if (response.status !== 200) {
-            console.error('Erro ao registrar dados de analytics:', response.data); // Log da resposta detalhada
-            return res.status(500).json({ error: 'Falha ao registrar dados de analytics', details: response.data });
-        }
-        */
+        const urlAnalitcs = 'http://127.0.0.1:5900/analyticsPerson';
+        let analyticsMessage = 'Usuário atualizado com sucesso, mas não foi possível enviar os dados para a API de Analytics.'
+        try {
+            const response = await axios.post(urlAnalitcs, {
+                type: 'delete',
+                id_collaborator: user.id_collaborator,  // Alterado para id_collaborator
+                name: user.name,  // nome do usuário
+                wage: user.wage,
+                position: user.position
+            }, {
+                headers: {
+                    'X-API-Key': process.env.X_API_key,  // A chave da API
+                }
+            });
+             
 
-        // Deletar o usuário da tabela User
+            // Verificar a resposta da API de Analytics
+            if (response.status === 200) {
+                analyticsMessage = 'Usuário criado com sucesso e dados enviados para a API de Analytics.';
+            } else {
+                throw new Error(`Falha ao comunicar com a API de Analytics. Status: ${response.status}`);
+            }
+        } catch (error) {
+            console.error('Erro ao enviar dados para a API de Analytics:', error.message);
+        }
+
         await User.destroy({ where: { id_collaborator } });
 
         return res.status(200).json({ message: 'Usuário e suas referências excluídas com sucesso' });
