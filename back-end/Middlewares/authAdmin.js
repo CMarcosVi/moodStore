@@ -1,7 +1,7 @@
 import User from '../Models/Users.js';
 import cookieParser from 'cookie-parser';
 
-const verificarToken = async (req, res, next) => {
+const verificarTokenAdmin = async (req, res, next) => {
     const token = req.cookies.token;  
 
     if (!token) {
@@ -11,9 +11,10 @@ const verificarToken = async (req, res, next) => {
     try {
         const user = await User.findOne({ where: { token } });
 
-        if (!user) {
+        if (!user || user.type_user !== 'admin') {
             return res.redirect('/login');
         }
+
         req.user = user;
 
         next();
@@ -23,4 +24,4 @@ const verificarToken = async (req, res, next) => {
     }
 };
 
-export default verificarToken;
+export default verificarTokenAdmin;

@@ -53,7 +53,7 @@ async def create_product(product: Product):
     data = load_data(json_file_path_product)
 
     # Adiciona o novo produto
-    data.append(product.dict())
+    data.append(product.model_dump())
 
     # Salva os dados atualizados no arquivo de produtos
     save_data(data, json_file_path_product)
@@ -71,12 +71,21 @@ async def create_person(person: Person):
     data = load_data(json_file_path_person)
 
     # Adiciona a nova pessoa
-    data.append(person.dict())
+    data.append(person.model_dump())
 
     # Salva os dados atualizados no arquivo de pessoas
     save_data(data, json_file_path_person)
 
     return {"message": "Pessoa adicionada com sucesso", "person": person}
+
+
+
+
+
+
+
+
+
 
 # Executando o agendador em segundo plano
 def start_scheduler():

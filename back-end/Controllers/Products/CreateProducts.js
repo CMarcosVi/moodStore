@@ -39,9 +39,8 @@ const createProduct = async (req, res) => {
             id_product: sanitization_id_product,
             price_for_unit: sanitization_price_product
         });
-
+        /*
         // até aqui tudo bem
-
         const urlAnalitcs = 'http://127.0.0.1:5900/analytics';
         const currentDateTime = getCurrentDateTime();
 
@@ -63,6 +62,7 @@ const createProduct = async (req, res) => {
         if (response.status !== 200) {
             return res.status(500).json({ error: 'Falha ao registrar dados de analytics', details: response.data });
         }
+        */
 
         // Retornar uma resposta de sucesso
         return res.status(201).json({ message: 'Novo produto criado', Produto: createNewProduct });

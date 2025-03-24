@@ -14,6 +14,7 @@ def load_data(file_path):
         except json.JSONDecodeError:
             return []  # Se o arquivo estiver vazio ou corrompido, retorna uma lista vazia
 
+
 # Função para salvar os dados no arquivo JSON
 def save_data(data, file_path):
     os.makedirs(os.path.dirname(file_path), exist_ok=True)

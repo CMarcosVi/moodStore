@@ -50,7 +50,7 @@ const deleteUser = async (req, res) => {
                 }
             );
         }
-
+        /*
         const urlAnalitcs = 'http://127.0.0.1:5900/analyticsPerson';
         let analyticsMessage = 'Usuário atualizado com sucesso, mas não foi possível enviar os dados para a API de Analytics.'
         try {
@@ -76,7 +76,7 @@ const deleteUser = async (req, res) => {
         } catch (error) {
             console.error('Erro ao enviar dados para a API de Analytics:', error.message);
         }
-
+        */
         await User.destroy({ where: { id_collaborator } });
 
         return res.status(200).json({ message: 'Usuário e suas referências excluídas com sucesso' });

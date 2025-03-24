@@ -93,7 +93,7 @@ const updateUser = async (req, res) => {
         // Enviar os dados para a API de Analytics
         const urlAnalitcs = 'http://127.0.0.1:5900/analyticsPerson';
         let analyticsMessage = 'Usuário atualizado com sucesso, mas não foi possível enviar os dados para a API de Analytics.';
-
+        /*
         try {
             const response = await axios.post(urlAnalitcs, {
                 type: 'edit',
@@ -116,7 +116,7 @@ const updateUser = async (req, res) => {
         } catch (error) {
             console.error('Erro ao enviar dados para a API de Analytics:', error.message);
         }
-
+        */
         return res.status(200).json({ message: analyticsMessage });
 
     } catch (error) {

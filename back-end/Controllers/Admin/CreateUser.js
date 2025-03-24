@@ -64,7 +64,7 @@ const createUser = async (req, res) => {
         
             return `${hours}:${minutes}:${seconds} ${day}/${month}/${year}`;
         }
-        // Enviar os dados para a API de Analytics
+        /* Enviar os dados para a API de Analytics
         const urlAnalitcs = 'http://127.0.0.1:5900/analyticsPerson';
         let analyticsMessage = 'Usuário criado com sucesso, mas não foi possível enviar os dados para a API de Analytics.';
 
@@ -93,7 +93,7 @@ const createUser = async (req, res) => {
         } catch (error) {
             console.error('Erro ao enviar dados para a API de Analytics:', error.message);
         }
-
+        */
         return res.status(200).json({ message: analyticsMessage, user: newUserCreate });
 
     } catch (error) {
