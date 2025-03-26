@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+*{
+    font-family: "Montserrat", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/*header*/
+body{
+    padding: 0px 5%;
+    background-color: #000;
+}
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px 10px;
+}
+nav > a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+}
+.logo-type{
+    color: #fff;
+}
+.logo-type > img{
+    width: 150px;
+}
+nav{
+    background-color: #ffffff05;
+    backdrop-filter: blur(12px);
+    padding:10px 30px;
+    border-radius: 50px;
+    border: 1px solid #55555544;
+    display: flex;
+    gap: 100px;
+    animation: animation-home-container .4s ease;
+}
+.link1{
+    font-family: "Major Mono Display", monospace;
+    font-weight: 600;
+    font-size: 13px;
+    animation: animatio-nav-bar-link .4s ease ;
+}
+.link2{
+    font-family: "Major Mono Display", monospace;
+    font-weight: 600;
+    font-size: 13px;
+    animation: animatio-nav-bar-link .8s ease ;
+}
+.link3{
+    font-family: "Major Mono Display", monospace;
+    font-weight: 600;
+    font-size: 13px;
+    animation: animatio-nav-bar-link 1.2s ease ;
+}
+.link4{
+    font-family: "Major Mono Display", monospace;
+    font-weight: 600;
+    font-size: 13px;
+    animation: animatio-nav-bar-link 1.6s ease ;
+}
+.redirect-Login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    gap: 10px;
+}
+.logo-type{
+    animation: animatio-nav-bar-link .5s linear;
+}
+.createAccount{
+    font-family: "Major Mono Display", monospace;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: bold;
+    animation: animatio-nav-bar-link .5s linear;
+}
+.loginBtn{
+    font-family: "Major Mono Display", monospace;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: bold;
+    animation: animatio-nav-bar-link 1s linear;
+}
+/*header*/
+
+
+
+/*home*/
+#Home{
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 85vh;
+    width: 100%;
+    background: #fff;
+    border-radius: 10px;
+    z-index: 999;
+    padding: 1px;
+    animation: animation-home-bg 1s ease;
+    position: relative;
+}
+#Home > div{
+    position: relative;
+    height:100%;
+    width: 100%;
+    background: #333;
+    border-radius: 10px;
+    background: radial-gradient(circle, rgba(34,34,34,1) 0%, rgba(0,0,0,1) 100%);
+    background-size: 300% 300%;
+    background-position: left bottom;
+    animation: animation-home-bg 1s ease;
+    z-index: 9999999;
+}
+#Home::before{
+    content: '';
+    position: absolute;
+    background-color: #000;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    animation: animation-cubo-border 10s ease-in-out infinite;
+    animation-timing-function: linear;
+}
+/*home*/
+
+
+/*animation*/
+@keyframes animatio-nav-bar-link{
+    0%{
+        opacity: 0;
+        position: relative;
+        bottom: -10px;
+    }
+    100%{
+        opacity: 1;
+        position: relative;
+        bottom: 0px;
+    }
+}
+@keyframes animation-home-bg{
+    0%{
+        background-size: 150% 150%;
+        opacity: 0;
+        scale: 1.1;
+    }
+    100%{
+        background-size: 300% 300%;
+        opacity: 1;
+        scale: 1;
+    }
+}
+@keyframes animation-home-bg-between{
+    0%{
+        background-size: 150% 150%;
+        opacity: 0;
+        scale: 1.1;
+    }
+    100%{
+        background-size: 300% 300%;
+        opacity: 1;
+        scale: 1;
+    }
+}
+@keyframes animation-home-container{
+    0%{
+        opacity: 0;
+        scale: 1.1;
+    }
+    100%{
+        opacity: 1;
+        scale: 1;
+    }
+}
+@keyframes animation-cubo-border{
+    0%{
+        top: -1%;
+        left: -1%;
+    }
+    25%{  
+        top: 99%;
+        left: -1%;
+    }
+    60%{
+        top: 99%;
+        left: 99.5%;
+    }
+    85%{
+        top: -1%;
+        left: 99.5%;
+    }
+    100%{
+        top: -1%;
+        left: -1%;
+    }
+}
+/*animation*/
