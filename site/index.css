@@ -5,6 +5,9 @@
     padding: 0;
     box-sizing: border-box;
 }
+.logo-link{
+    border-radius: 10px;
+}
 /*header*/
 body{
     padding: 0px 5%;
@@ -43,24 +46,57 @@ nav{
     font-weight: 600;
     font-size: 13px;
     animation: animatio-nav-bar-link .4s ease ;
+    position: relative;
+    letter-spacing: 1px;
+}
+.link1:hover{
+    transition: .5s;
+}
+.link1::before,.link2::before,.link3::before,.link4::before{
+    position: absolute;
+    content: '';
+    top: 99%;
+    left: 0%;
+    height: 2px;
+    width: 0%;
+    transition: .5s;
+    margin-top: 2px;
+    background-color: #fff;
+}
+
+.link1:hover::before,.link2:hover::before,.link3:hover::before,.link4:hover::before{
+    content: '';
+    top: 100%;
+    left: 0%;
+    height: 2px;
+    width: 100%;
+    transition: .5s;
+    background-color: #fff;
+    margin-top: 2px;
 }
 .link2{
     font-family: "Major Mono Display", monospace;
     font-weight: 600;
     font-size: 13px;
-    animation: animatio-nav-bar-link .8s ease ;
+    animation: animatio-nav-bar-link .4s ease ;
+    position: relative;
+    letter-spacing: 1px;
 }
 .link3{
     font-family: "Major Mono Display", monospace;
     font-weight: 600;
     font-size: 13px;
-    animation: animatio-nav-bar-link 1.2s ease ;
+    animation: animatio-nav-bar-link .4s ease ;
+    position: relative;
+    letter-spacing: 1px;
 }
 .link4{
     font-family: "Major Mono Display", monospace;
     font-weight: 600;
     font-size: 13px;
-    animation: animatio-nav-bar-link 1.6s ease ;
+    animation: animatio-nav-bar-link .4s ease ;
+    position: relative;
+    letter-spacing: 1px;
 }
 .redirect-Login{
     display: flex;
