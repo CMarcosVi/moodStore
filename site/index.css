@@ -187,6 +187,11 @@ nav{
     position: relative;
 }
 #Home > div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
     position: relative;
     height:100%;
     width: 100%;
@@ -197,7 +202,13 @@ nav{
     background-position: left bottom;
     animation: animation-home-bg 1s ease;
     z-index: 9999999;
+    overflow: hidden;
 }
+#Home > div > h1{
+    color: #fff;
+    font-family: "Major Mono Display", monospace;
+}
+
 #Home::before{
     content: '';
     position: absolute;
@@ -210,16 +221,59 @@ nav{
     animation: animation-cubo-border 10s ease-in-out infinite;
     animation-timing-function: linear;
 }
+.img-center-screen{
+    max-width: 600px;
+    mix-blend-mode: plus-lighter;
+    animation: animatio-nav-bar-link 2.5s linear;
+}
+#title{
+    animation: animatio-nav-bar-link 1s linear;
+}
+#title > span:nth-child(1) {
+    font-family: "Major Mono Display", monospace;
+    animation: animatio-nav-bar-link 1s linear;
+}
+
+#title > span:nth-child(2) {
+    font-family: "Major Mono Display", monospace;
+    animation: animatio-nav-bar-link 1.5s linear;
+}
+
+#title > span:nth-child(3) {
+    font-family: "Major Mono Display", monospace;
+    animation: animatio-nav-bar-link 2s linear;
+}
+.line1{
+    position: absolute;
+    top: 0;
+    left: -1%;
+}
+.line1 > img{
+    height: 400px;
+    position: relative;
+}
+.line1::before{
+    content: '';
+    position: absolute;
+    left: 75%;
+    height: 30px;
+    width: 10px;
+    background-color: #000;
+    z-index: 99999999999;
+    animation: cube-animation-line 2s linear infinite;
+}
+
 /*home*/
+
 /*contact*/
 #contact{
     overflow: hidden;
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: center;
     padding-top: 90px;
     padding-bottom: 90px;
-    min-height: 50vh;
+    min-height: 110vh;
     width: 100%;
     z-index: 999;
     animation: animation-home-bg 1s ease;
@@ -227,6 +281,10 @@ nav{
 }
 #contact > div{
     width: 50%;
+}
+.container-title-contact{
+    margin-top: auto;
+    margin-bottom: auto;
 }
 .title-contact{
     color: #fff;
@@ -277,6 +335,54 @@ nav{
     transition: .5s;
     border: 2px solid #fff;
 }
+.tecnologis-list{
+    display: none !important;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr   ;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+}
+.tecnologis{
+    width: 90px;
+    height: 60px;
+
+    border-radius: 10px;
+    border: 2px solid #fff;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #111;
+}
+.tecnologis > img{
+    height: 30px;
+}
+.hide-list{
+    display: grid !important;
+}
+.select-tecnologi,.select-service{
+    background-color: #fff !important;
+    transition: .5s;
+    color: #000 !important;
+}
+.type-service{
+
+}
+.service-list{
+    display: grid !important;
+    grid-template-columns: 1fr 1fr 1fr 1fr !important;
+}
+.service{
+    width: 130px;
+    height: 50px;
+    border-radius: 10px;
+    border: 2px solid #fff;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #111;
+}
 /*contact*/
 
 /**Mouse-pointer-cicle**/
@@ -293,6 +399,20 @@ nav{
     z-index: 9999999999999999999;
 }
 /*MEDIA SCREEN*/
+@media only screen and (max-width: 1250px) {
+    .service-list{
+        grid-template-columns: 1fr 1fr 1fr !important;
+        align-items: center;
+        justify-items: center;
+    }
+}
+@media only screen and (max-width: 1100px) {
+    .tecnologis-list{
+        grid-template-columns: 1fr 1fr 1fr 1fr !important;
+        align-items: center;
+        justify-content: center;
+    }
+}
 @media only screen and (max-width: 1000px) {
     header{
         justify-content: center !important;
@@ -348,10 +468,17 @@ nav{
     #contact{
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-items: center;
         text-align: center;
     }
-    /**contact/
+    .container-form{
+        width: 100% !important;
+    }
+    .service-list{
+        align-items: center;
+        justify-items: center;
+    }
+    /*contact*/
     #Home{
         height: 75vh  !important;
     }
@@ -359,6 +486,19 @@ nav{
 
     .circle-pointer-mouse{
         display: none !important;
+    }
+}
+@media only screen and (max-width: 900px) {
+    .service{
+        width: 100px;
+        height: 34px;
+        font-size: 13px;
+    }
+    .tecnologis-list{
+        grid-template-columns: 1fr 1fr 1fr !important;
+    }
+    .tecnologis{
+        width: 90%;
     }
 }
 /*MEDIA SCREEN*/
@@ -445,5 +585,28 @@ nav{
         top: -1%;
         left: -2%;
     }
+}
+@keyframes cube-animation-line {
+    0%{
+        top:0%;
+        height: 30px;
+        left: 75%;
+    }
+    50%{
+        top:63%;
+        height: 10px;
+        left: 75%;
+    }
+    77%{
+        transform: rotate(45deg);
+        top: 88%;
+        left: 15%;
+    }
+    100%{
+        transform: rotate(45deg);
+        top: 95%;
+        left: 0%;
+    }
+    
 }
 /*animation*/
