@@ -13,7 +13,7 @@
 body{
     padding: 0px 5%;
     background-color: #000;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 header{
     display: flex;
@@ -211,7 +211,73 @@ nav{
     animation-timing-function: linear;
 }
 /*home*/
-
+/*contact*/
+#contact{
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 90px;
+    padding-bottom: 90px;
+    min-height: 50vh;
+    width: 100%;
+    z-index: 999;
+    animation: animation-home-bg 1s ease;
+    position: relative;
+}
+#contact > div{
+    width: 50%;
+}
+.title-contact{
+    color: #fff;
+    font-family: "Major Mono Display", monospace;
+    font-size: 56px;
+}
+.container-form > form{
+    display: flex;
+    flex-direction: column;
+    color: #fff !important;
+}
+.container-form > form > div{
+    display: flex;
+    flex-direction: column;
+    color: #fff !important;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.container-form > form > div  > label{
+    margin-bottom: 5px;
+    font-size: 24px;
+    color: #fff !important;
+    font-family: "Major Mono Display", monospace;
+}
+.container-form > form > div  > input{
+    font-size: 24px;
+    background-color: #333;
+    border-radius: 5px;
+    border: none;
+}
+.change-yes-or-not{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.value-input{
+    font-family: "Major Mono Display", monospace;
+    margin-top: 20px;
+    padding: 10px 30px;
+    border-radius: 10px;
+    background-color: #111;
+    border: 2px solid #888;
+    transition: .5s;
+}
+.select-value{
+    background-color: #fff;
+    color: #000;
+    transition: .5s;
+    border: 2px solid #fff;
+}
+/*contact*/
 
 /**Mouse-pointer-cicle**/
 .circle-pointer-mouse {
@@ -278,7 +344,14 @@ nav{
         filter: invert(1);
     }
 
-
+    /*contatct*/
+    #contact{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    /**contact/
     #Home{
         height: 75vh  !important;
     }
