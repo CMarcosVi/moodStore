@@ -6,7 +6,7 @@ const LIST_TECNOLOGIS_SELECT = document.querySelector('.tecnologis-list')
 const TECNOLOGIS_USED = document.querySelectorAll('.tecnologis')
 const SERVICE_LIST = document.querySelectorAll('.service')
 const MOVING_IMG_MOUSE = document.getElementById("Moving");
-
+const TITLE_ANIMATION = document.getElementById("title")
 
 
 TECNOLOGIS_USED.forEach((element) => {
@@ -42,8 +42,9 @@ document.addEventListener("mousemove", (ev) => {
     const positionY = (window.innerHeight / 2 - ev.y) / 50; 
 
     MOVING_IMG_MOUSE.style.transform = `translate(${positionX}px, ${positionY}px)`;
+    TITLE_ANIMATION.style.transform = `translate(${positionX}px, ${positionY}px)`
 });
-
+TITLE_ANIMATION
 
 VALUE_INPUT_NOT.addEventListener('click', () => {
     VALUE_INPUT_NOT.classList.add('select-value');
