@@ -251,11 +251,17 @@ nav{
     top: 0;
     left: -1%;
 }
-.line1 > img{
+.line2{
+    position: absolute;
+    left: 95%;
+    transform: rotate(180deg); 
+    top: 50%;
+}
+.line1 > img ,.line2 > img{
     height: 400px;
     position: relative;
 }
-.line1::before{
+.line1::before,.line2::before{
     content: '';
     position: absolute;
     left: 75%;
@@ -265,7 +271,15 @@ nav{
     z-index: 99999999999;
     animation: cube-animation-line 2s linear infinite;
 }
-
+.scroll-container {
+    position: relative;
+    height: 300px;
+    background-color: #3498db;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.2s ease-out;
+  }
 /*home*/
 
 /*contact*/

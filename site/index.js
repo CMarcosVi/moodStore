@@ -7,7 +7,17 @@ const TECNOLOGIS_USED = document.querySelectorAll('.tecnologis')
 const SERVICE_LIST = document.querySelectorAll('.service')
 const MOVING_IMG_MOUSE = document.getElementById("Moving");
 const TITLE_ANIMATION = document.getElementById("title")
+const scrollContainer = document.querySelector('.scroll-container');
 
+window.addEventListener('scroll', () => {
+    const scrollPosition = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const containerHeight = scrollContainer.offsetHeight;
+    const opacityLossFactor = 0.0013;
+    let opacity = 1 - (scrollPosition * opacityLossFactor);
+    opacity = Math.max(0, opacity);
+    scrollContainer.style.opacity = opacity;
+});
 
 
 const scrollToSection = (sectionId) => {
