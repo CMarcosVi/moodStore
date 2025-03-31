@@ -9,6 +9,18 @@ const MOVING_IMG_MOUSE = document.getElementById("Moving");
 const TITLE_ANIMATION = document.getElementById("title")
 
 
+
+const scrollToSection = (sectionId) => {
+    const targetElement = document.getElementById(sectionId);
+    
+    if (targetElement) {
+      targetElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  }
+
 TECNOLOGIS_USED.forEach((element) => {
     element.addEventListener("click", () => {
         element.classList.toggle('select-tecnologi');
@@ -44,7 +56,7 @@ document.addEventListener("mousemove", (ev) => {
     MOVING_IMG_MOUSE.style.transform = `translate(${positionX}px, ${positionY}px)`;
     TITLE_ANIMATION.style.transform = `translate(${positionX}px, ${positionY}px)`
 });
-TITLE_ANIMATION
+
 
 VALUE_INPUT_NOT.addEventListener('click', () => {
     VALUE_INPUT_NOT.classList.add('select-value');
@@ -72,4 +84,14 @@ LINK_NAV_BAR.forEach(element => {
     })
 });
 */
-
+const targetAnimation = () => {
+    TITLE_ANIMATION.style.animation = "animation-tec-text 6s infinite linear"
+    TITLE_ANIMATION.children[0].style.animation = "animation-tec-text 5s infinite linear";
+    TITLE_ANIMATION.children[1].style.animation = "animation-tec-text 4s infinite linear";
+    TITLE_ANIMATION.children[2].style.animation = "animation-tec-text 3s infinite linear";
+}
+setTimeout(targetAnimation, 5000)
+scrollToSection("loginBtn");
+scrollToSection();
+scrollToSection();
+scrollToSection();

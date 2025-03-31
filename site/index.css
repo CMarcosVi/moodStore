@@ -5,6 +5,7 @@
     padding: 0;
     box-sizing: border-box;
     cursor: none;
+    scroll-behavior: smooth;
 }
 .logo-link{
     border-radius: 10px;
@@ -137,6 +138,8 @@ nav{
     font-weight: bold;
     animation: animatio-nav-bar-link 1s linear;
     padding: 5px 10px;
+    text-decoration: none !important;
+    color: #fff;
 }
 .loginBtn > p,.createAccount > p{
     position: relative;
@@ -647,5 +650,22 @@ nav{
         left: 0%;
     }
     
+}
+@keyframes animation-tec-text{
+    0%{
+        opacity: 0;
+    }
+    1%{
+        opacity: 1; 
+    }
+    2%{
+        opacity: 0; 
+    }
+    3%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 1;
+    }
 }
 /*animation*/
