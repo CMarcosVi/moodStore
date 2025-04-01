@@ -25,7 +25,7 @@ PREV_BTN.addEventListener("click", () => {
     let currentTop = parseInt(SERVICE_CONTAINER.style.top) || 0; 
     SERVICE_CONTAINER.style.top = (currentTop + 100) + "%";
     if (currentTop + 100 >= - 0) {
-        SERVICE_CONTAINER.style.top = "0%";
+        SERVICE_CONTAINER.style.top = "-300%";
     }
 });
 window.addEventListener('scroll', () => {
