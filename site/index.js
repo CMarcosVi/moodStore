@@ -7,7 +7,21 @@ const TECNOLOGIS_USED = document.querySelectorAll('.tecnologis')
 const SERVICE_LIST = document.querySelectorAll('.service')
 const MOVING_IMG_MOUSE = document.getElementById("Moving");
 const TITLE_ANIMATION = document.getElementById("title")
+const PREV_BTN = document.getElementById("btn-prev");
+const NEXT_BTN = document.getElementById("btn-next");
+const SERVICE_CONTAINER = document.querySelector(".list-servies");
 const scrollContainer = document.querySelector('.scroll-container');
+
+NEXT_BTN.addEventListener("click", () => {
+    // Adiciona 100px ao valor atual da posição top
+    let currentTop = parseInt(SERVICE_CONTAINER.style.top) || 0; // Se não for número, inicia como 0
+    SERVICE_CONTAINER.style.top = (currentTop - 100) + "%";
+
+    // Verifica se a posição top alcançou 700px
+    if (currentTop - 100 <= -400) {
+        SERVICE_CONTAINER.style.top = "0%"; // Reseta para 0px
+    }
+});
 
 window.addEventListener('scroll', () => {
     const scrollPosition = window.scrollY;
