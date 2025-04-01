@@ -165,7 +165,6 @@ nav{
 .loginBtn:hover,.createAccount:hover{
     transition: .5s;
     color: #000;
-
 }
 .nav-bar-hamburg{
     display: none;
@@ -417,12 +416,17 @@ nav{
     align-items: center;
     justify-content: center;
     transition: .2s;
+    transition: font-style 3s ease;
+    transition: .5s;
+
 }
 .list-servies > li:hover{
     font-size:80px ;
     transition: .2s;
     letter-spacing: 20px;
     text-align: center;
+    transition: .5s;
+    transform: skewX(-15deg); /* Inclina o texto para simular o efeito itálico */
 }
 .container-list{
     overflow: hidden;
@@ -435,7 +439,7 @@ nav{
     transition:1.5s;
 }
 .container-list{
-    width: 30%;
+    width: 25%;
     position: relative;
     display: flex;
     align-items: center;
@@ -460,13 +464,28 @@ nav{
     background: linear-gradient(360deg, rgba(0,0,0,1) 23%, rgba(255,255,255,0) 99%);
     z-index: 9999999999;
 }
-.btn-container{
+.container-list-servies{
+    display: flex;
+    align-items: center;
+}
+.btn-container-next-prev{
+    width: 5%;
     display: flex;
     flex-direction: column;
 }
+#btn-next:hover,#btn-prev:hover{
+    transition: 1s;
+    color: #000;
+    background-color: #fff;
+}
 #btn-next,#btn-prev{
     color: #fff;
-
+    font-size: 24px;
+    transition: 1s;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 2px;
 }
 /*Services*/
 /**Mouse-pointer-cicle**/

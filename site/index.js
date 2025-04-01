@@ -10,19 +10,24 @@ const TITLE_ANIMATION = document.getElementById("title")
 const PREV_BTN = document.getElementById("btn-prev");
 const NEXT_BTN = document.getElementById("btn-next");
 const SERVICE_CONTAINER = document.querySelector(".list-servies");
+const SERVICE = document.querySelectorAll("service");
 const scrollContainer = document.querySelector('.scroll-container');
 
-NEXT_BTN.addEventListener("click", () => {
-    // Adiciona 100px ao valor atual da posição top
-    let currentTop = parseInt(SERVICE_CONTAINER.style.top) || 0; // Se não for número, inicia como 0
-    SERVICE_CONTAINER.style.top = (currentTop - 100) + "%";
 
-    // Verifica se a posição top alcançou 700px
+NEXT_BTN.addEventListener("click", () => {
+    let currentTop = parseInt(SERVICE_CONTAINER.style.top) || 0; 
+    SERVICE_CONTAINER.style.top = (currentTop - 100) + "%";
     if (currentTop - 100 <= -400) {
         SERVICE_CONTAINER.style.top = "0%"; // Reseta para 0px
     }
 });
-
+PREV_BTN.addEventListener("click", () => {
+    let currentTop = parseInt(SERVICE_CONTAINER.style.top) || 0; 
+    SERVICE_CONTAINER.style.top = (currentTop + 100) + "%";
+    if (currentTop + 100 >= - 0) {
+        SERVICE_CONTAINER.style.top = "0%";
+    }
+});
 window.addEventListener('scroll', () => {
     const scrollPosition = window.scrollY;
     const windowHeight = window.innerHeight;
