@@ -427,6 +427,7 @@ nav{
     text-align: center;
     transition: .5s;
     transform: skewX(-15deg); /* Inclina o texto para simular o efeito itálico */
+    text-shadow: 0px 0px 7px #888;
 }
 .container-list{
     overflow: hidden;
@@ -439,7 +440,7 @@ nav{
     transition:1.5s;
 }
 .container-list{
-    width: 25%;
+    width: 100%;
     position: relative;
     display: flex;
     align-items: center;
@@ -469,9 +470,8 @@ nav{
     align-items: center;
 }
 .btn-container-next-prev{
-    width: 5%;
+    width: 100%;
     display: flex;
-    flex-direction: column;
 }
 #btn-next:hover,#btn-prev:hover{
     transition: 1s;
@@ -479,15 +479,73 @@ nav{
     background-color: #fff;
 }
 #btn-next,#btn-prev{
+    width: 50%;
     color: #fff;
     font-size: 24px;
     transition: 1s;
     text-align: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 0px;
+    margin-bottom: 0px;
     border-radius: 2px;
 }
+.btn-and-container{
+    width: 30%;
+}
+.hover-service-item{
+    background-color: #fff !important;
+    border: 2px solid #fff !important;
+    box-shadow: 0px 0px 10px 2px #fff;
+}
+.hover-service-item::before{
+    top: -110%;
+    left: -50%;
+    position: relative;
+    content: 'click';
+    color: #fff;
+    font-style: italic;
+}
 /*Services*/
+/*TECNOLOGIS*/
+.title-tecnologis{
+    text-align: center;
+    margin-top: 70px;
+    font-size: 40px;
+    color: rgb(255, 255, 255);
+    font-family: "Major Mono Display", monospace;
+}
+/*TECNOLOGIS*/
+/**loading-projects*/
+.loading-projects{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    height: 100%;
+    width: 100%;
+    z-index: 9999999999999;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.text-loading{
+    font-family: "Major Mono Display", monospace;
+    font-size: 90px;
+    font-weight: 600;
+    color: #fff;
+    list-style: none;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .2s;
+    transition: font-style 3s ease;
+    transition: .5s;
+    animation: animation-service-loading 2s linear;
+    animation-fill-mode: forwards;
+}
+
+/**loading-projects*/
 /**Mouse-pointer-cicle**/
 .circle-pointer-mouse {
     position: absolute;
@@ -768,4 +826,40 @@ nav{
         opacity: 1;
     }
 }
+@keyframes animation-service-loading {
+    0%{
+        transform: skewX(0deg);
+
+    }
+    4%{
+        transform: skewX(-15deg);
+    }
+    100%{
+        letter-spacing: 50px;
+        transform: skewX(-15deg);
+        text-shadow: 0px 0px 7px #888;
+    }
+}
 /*animation*/
+
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+#SERVICE_LOADING {
+    display: none; /* Inicialmente escondido */
+    opacity: 0;
+    transition: opacity 0.25s ease-in-out;
+}
+
+/* Quando o elemento for mostrado, aplique a animação */
+.show-loading {
+    display: flex;
+    animation: fadeIn .25s ease-in-out; /* Animação de fade in */
+}
