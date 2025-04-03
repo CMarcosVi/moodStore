@@ -15,6 +15,38 @@ const SCROLL_CONTAINER = document.querySelector('.scroll-container');
 const SERVICE_ITEM = document.querySelectorAll('.service-item')
 const SERVICE_LOADING = document.querySelector('.loading-projects')
 const SERVICE_LOADING_TEXT = document.querySelector('.text-loading')
+const SECTION_TECH = document.getElementById("tecnologys");
+const TITLE_FORNT_END = document.getElementById("titulo-front-end");
+
+const isElementCentered = (el) => {
+    const rect = el.getBoundingClientRect();
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    const elementCenter = rect.top + rect.height / 2;
+    return elementCenter >= windowHeight * 0.05 - 10 && elementCenter <= windowHeight * 0.9 + 10;
+};
+
+const handleScroll = () => {
+    const SECTION_TECH = document.getElementById("tecnologys");
+    const TITLE_FORNT_END = document.getElementById("title-front-end");
+
+    if (!SECTION_TECH || !TITLE_FORNT_END) {
+        console.error("Erro: Elementos não encontrados.");
+        return;
+    }
+
+    if (isElementCentered(SECTION_TECH)) {
+        TITLE_FORNT_END.classList.add("animation-title");
+        TITLE_FORNT_END.style.setProperty("--before-animation", "animation-slider-shadow 1.5s  linear both");
+
+        window.removeEventListener("scroll", handleScroll);
+    }
+};
+
+window.addEventListener("scroll", handleScroll);
+
+
+
+
 
 
 SERVICE_ITEM.forEach((element) => {
