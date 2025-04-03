@@ -16,7 +16,9 @@ const SERVICE_ITEM = document.querySelectorAll('.service-item')
 const SERVICE_LOADING = document.querySelector('.loading-projects')
 const SERVICE_LOADING_TEXT = document.querySelector('.text-loading')
 const SECTION_TECH = document.getElementById("tecnologys");
-const TITLE_FORNT_END = document.getElementById("titulo-front-end");
+const TITLE_FRONT_END = document.getElementById("title-front-end");
+const TITLE_BACK_END = document.getElementById("title-back-end");
+const TECHNOLOGY_LISTS = document.querySelectorAll(".list-tecn-tecnologys"); // Pega todas as listas
 
 const isElementCentered = (el) => {
     const rect = el.getBoundingClientRect();
@@ -26,25 +28,29 @@ const isElementCentered = (el) => {
 };
 
 const handleScroll = () => {
-    const SECTION_TECH = document.getElementById("tecnologys");
-    const TITLE_FORNT_END = document.getElementById("title-front-end");
-
-    if (!SECTION_TECH || !TITLE_FORNT_END) {
+    if (!SECTION_TECH || !TITLE_FRONT_END || !TITLE_BACK_END || TECHNOLOGY_LISTS.length === 0) {
         console.error("Erro: Elementos não encontrados.");
         return;
     }
 
     if (isElementCentered(SECTION_TECH)) {
-        TITLE_FORNT_END.classList.add("animation-title");
-        TITLE_FORNT_END.style.setProperty("--before-animation", "animation-slider-shadow 1.5s  linear both");
+        TITLE_FRONT_END.classList.add("animation-title");
+        TITLE_BACK_END.classList.add("animation-title");
+
+        // Aplicando animação no ::before
+        TITLE_FRONT_END.style.setProperty("--before-animation", "animation-slider-shadow 1.5s linear both");
+        TITLE_BACK_END.style.setProperty("--before-animation", "animation-slider-shadow-left 1.5s linear both");
+
+        // Aplicando animação nas listas de tecnologias
+        TECHNOLOGY_LISTS.forEach(list => {
+            list.classList.add("start-animation");
+        });
 
         window.removeEventListener("scroll", handleScroll);
     }
 };
 
 window.addEventListener("scroll", handleScroll);
-
-
 
 
 
