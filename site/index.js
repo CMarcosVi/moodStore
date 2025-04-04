@@ -15,10 +15,21 @@ const SCROLL_CONTAINER = document.querySelector('.scroll-container');
 const SERVICE_ITEM = document.querySelectorAll('.service-item')
 const SERVICE_LOADING = document.querySelector('.loading-projects')
 const SERVICE_LOADING_TEXT = document.querySelector('.text-loading')
-const SECTION_TECH = document.getElementById("tecnologys");
+
+
+const CONTAINER_FRONT_END = document.getElementsByClassName("front-end-container")[0]; // Acessando o primeiro elemento
 const TITLE_FRONT_END = document.getElementById("title-front-end");
+
+const CONTAINER_BACK_END = document.getElementsByClassName("back-end-container")[0]; // Acessando o primeiro elemento
 const TITLE_BACK_END = document.getElementById("title-back-end");
-const TECHNOLOGY_LISTS = document.querySelectorAll(".list-tecn-tecnologys"); // Pega todas as listas
+
+const CONTAINER_OUTHERS = document.getElementsByClassName("outher-container")[0]; // Acessando o primeiro elemento
+const TITLE_OUTHER_TECH = document.getElementById("title-outhers");
+
+const SECTION_TECH = document.getElementById("tecnologys");
+const TECHNOLOGY_LISTS_1 = document.querySelectorAll(".list-tecn-tecnologys1");
+const TECHNOLOGY_LISTS_2 = document.querySelectorAll(".list-tecn-tecnologys2");
+const TECHNOLOGY_LISTS_3 = document.querySelectorAll(".list-tecn-tecnologys3");
 
 const isElementCentered = (el) => {
     const rect = el.getBoundingClientRect();
@@ -28,30 +39,30 @@ const isElementCentered = (el) => {
 };
 
 const handleScroll = () => {
-    if (!SECTION_TECH || !TITLE_FRONT_END || !TITLE_BACK_END || TECHNOLOGY_LISTS.length === 0) {
-        console.error("Erro: Elementos não encontrados.");
-        return;
-    }
-
-    if (isElementCentered(SECTION_TECH)) {
+    if (isElementCentered(CONTAINER_FRONT_END)) {
         TITLE_FRONT_END.classList.add("animation-title");
-        TITLE_BACK_END.classList.add("animation-title");
-
-        // Aplicando animação no ::before
         TITLE_FRONT_END.style.setProperty("--before-animation", "animation-slider-shadow 1.5s linear both");
-        TITLE_BACK_END.style.setProperty("--before-animation", "animation-slider-shadow-left 1.5s linear both");
-
-        // Aplicando animação nas listas de tecnologias
-        TECHNOLOGY_LISTS.forEach(list => {
+        TECHNOLOGY_LISTS_1.forEach(list => {
             list.classList.add("start-animation");
         });
-
-        window.removeEventListener("scroll", handleScroll);
+    }
+    if (isElementCentered(CONTAINER_BACK_END)) {
+        TITLE_BACK_END.classList.add("animation-title");
+        TITLE_BACK_END.style.setProperty("--before-animation", "animation-slider-shadow 1.5s linear both");
+        TECHNOLOGY_LISTS_2.forEach(list => {
+            list.classList.add("start-animation");
+        });
+    }
+    if (isElementCentered(CONTAINER_OUTHERS)) {
+        TITLE_OUTHER_TECH.classList.add("animation-title");
+        TITLE_OUTHER_TECH.style.setProperty("--before-animation", "animation-slider-shadow 1.5s linear both");
+        TECHNOLOGY_LISTS_3.forEach(list => {
+            list.classList.add("start-animation");
+        });
     }
 };
 
 window.addEventListener("scroll", handleScroll);
-
 
 
 
