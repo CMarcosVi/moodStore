@@ -38,6 +38,9 @@ const isElementCentered = (el) => {
     return elementCenter >= windowHeight * 0.05 - 10 && elementCenter <= windowHeight * 0.9 + 10;
 };
 
+
+
+
 const handleScroll = () => {
     if (isElementCentered(CONTAINER_FRONT_END)) {
         TITLE_FRONT_END.classList.add("animation-title");
