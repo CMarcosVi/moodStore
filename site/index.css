@@ -443,6 +443,11 @@ nav{
     color: #fff;
     font-family: "Major Mono Display", monospace;
 }
+.subtitle-services{
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+}
 .list-servies > li{
     font-family: "Major Mono Display", monospace;
     font-size: 90px;
@@ -662,7 +667,7 @@ nav{
 
 
 .version-1111{
-    margin-top: 100px;
+    margin-top: 50px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     align-items: center;
