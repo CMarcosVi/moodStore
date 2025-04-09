@@ -437,10 +437,12 @@ nav{
 /*contact*/
 /*Services*/
 #services{
+    display: none;
 }
 .text-services{
     text-align: center;
-    margin-top: 70px;
+    margin-top: 50px;
+    margin-bottom: 50px;
     font-size: 40px;
     color: #fff;
     font-family: "Major Mono Display", monospace;
@@ -553,11 +555,19 @@ nav{
 /*Services*/
 /*services2*/
 #services2{
+    background-image: url(./assets/img-background.png);
+    background-position: 0% bottom;
+    background-size: 120% 120%;
+    background-repeat: repeat-x ;
     padding-top: 90px;
     padding-bottom: 90px;
+    padding-left: 5%;
+    padding-right: 5%;
+    border-radius: 10px;
+    border: 1px solid #fff;
 }
 .container-services{
-    height: 300px;
+    height: 210px;
     background-color: #fff;
     width: 100%;
     border-radius: 10px;
