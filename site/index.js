@@ -6,13 +6,13 @@ const LIST_TECNOLOGIS_SELECT = document.querySelector('.tecnologis-list')
 const TECNOLOGIS_USED = document.querySelectorAll('.tecnologis')
 const SERVICE_LIST = document.querySelectorAll('.service')
 const MOVING_IMG_MOUSE = document.getElementById("Moving");
+const MOVING_IMG_MOUSE2 = document.getElementById("Moving2");
 const TITLE_ANIMATION = document.getElementById("title")
 const PREV_BTN = document.getElementById("btn-prev");
 const NEXT_BTN = document.getElementById("btn-next");
 const SERVICE_CONTAINER = document.querySelector(".list-servies");
 const SERVICE = document.querySelectorAll("service");
 const SCROLL_CONTAINER = document.querySelector('.scroll-container');
-const SERVICE_ITEM = document.querySelectorAll('.service-item')
 const SERVICE_LOADING = document.querySelector('.loading-projects')
 const SERVICE_LOADING_TEXT = document.querySelector('.text-loading')
 
@@ -67,43 +67,6 @@ const handleScroll = () => {
 
 window.addEventListener("scroll", handleScroll);
 
-
-
-SERVICE_ITEM.forEach((element) => {
-    element.addEventListener("mouseover", () => {
-        CIRCLE_MOUSE.classList.add('hover-service-item');
-    });
-    element.addEventListener("mouseout", () => {
-        CIRCLE_MOUSE.classList.remove('hover-service-item');
-    });
-    element.addEventListener("click", () => {
-        SERVICE_LOADING.classList.add('show-loading'); // Adiciona a classe que ativa a animação
-        SERVICE_LOADING_TEXT.innerText = element.textContent;
-
-        // Após 2,5 segundos, esconder o SERVICE_LOADING
-        setTimeout(() => {
-            SERVICE_LOADING.classList.remove('show-loading'); // Remove a animação e oculta
-        }, 1500); // 2,5 segundos
-    });
-});
-
-NEXT_BTN.addEventListener("click", () => {
-    let currentTop = parseInt(SERVICE_CONTAINER.style.top) || 0;
-    let newTop = currentTop - 100;
-    SERVICE_CONTAINER.style.top = newTop + "%";
-    if (newTop <= -400) {
-        SERVICE_CONTAINER.style.top = "-0%";
-    }
-});
-
-PREV_BTN.addEventListener("click", () => {
-    let currentTop = parseInt(SERVICE_CONTAINER.style.top) || 0;
-    let newTop = currentTop + 100;
-    SERVICE_CONTAINER.style.top = newTop + "%";
-    if (newTop >= 0) {
-        SERVICE_CONTAINER.style.top = "-300%";
-    }
-});
 
 window.addEventListener('scroll', () => {
     const scrollPosition = window.scrollY;
@@ -162,7 +125,12 @@ document.addEventListener("mousemove", (ev) => {
     MOVING_IMG_MOUSE.style.transform = `translate(${positionX}px, ${positionY}px)`;
     TITLE_ANIMATION.style.transform = `translate(${positionX}px, ${positionY}px)`
 });
+document.addEventListener("mousemove", (ev) => {
+    const positionX = (window.innerWidth / -90 - ev.x) / 70;
+    const positionY = (window.innerHeight / 2 - ev.y) / 50; 
 
+    MOVING_IMG_MOUSE2.style.transform = `translate(${positionX}px, ${positionY}px)`;
+});
 
 VALUE_INPUT_NOT.addEventListener('click', () => {
     VALUE_INPUT_NOT.classList.add('select-value');
