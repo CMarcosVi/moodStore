@@ -493,7 +493,7 @@ nav{
 
 .text-services{
     text-align: center;
-    margin-top: 50px;
+    margin-top: 25px;
     margin-bottom: 50px;
     font-size: 40px;
     color: #fff;
@@ -512,15 +512,15 @@ nav{
     background-position: 0% bottom;
     background-size: 120% 120%;
     background-repeat: repeat-x ;
-    padding-top: 90px;
-    padding-bottom: 90px;
+    padding-top: 50px;
+    padding-bottom: 50px;
     padding-left: 5%;
     padding-right: 5%;
     border-radius: 10px;
     border: 1px solid #fff;
 }
 .container-services{
-    height: 210px;
+    height: 130px;
     background-color: #fff;
     width: 100%;
     border-radius: 10px;
@@ -528,11 +528,37 @@ nav{
     padding: 1px;
     animation: border-fill-animation 4s ease-in-out forwards;
 }
+.container-services > .service-type-1{
+    height: 100%;
+    width: 100%;
+    background-color: #000 !important;
+    position: relative;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.service-type-2 > div{
+    background-color: #fff !important;
+}
+.service-type-2 > div > .icon-container-services > h3{
+    color: #000 !important;
+}
+.service-type-2 > div > .icon-container-services > img{
+    filter: invert(1);
+}
+.service-type-2 > div > p{
+    color: #000 !important;
+}
+.service-type-2 > div > .phrase{
+    color: #000 !important;
+}
 .services-list-2{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     justify-items: center;
-    gap: 40px;
+    gap: 20px;
 }
 .container-services > div > p{
     color: #fff;
@@ -543,15 +569,16 @@ nav{
     background-color: #111;
     position: relative;
     border-radius: 10px;
-    padding: 20px;
+    padding: 5px 15px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    justify-content: center;
+    gap: 15px;
 }
 .container-services > div > div > h3{
     color: #fff;
     font-family: "Major Mono Display", monospace;
-    font-size: 26px;
+    font-size: 22px;
 }
 .text-title-phrase{
     font-weight: bold;
@@ -570,8 +597,17 @@ nav{
     justify-content: start;
     gap: 20px;
 }
+.container-icon-services{
+    background-color: #000;
+    padding: 5px;
+    border: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
 .icons-services{
-    width: 35px;
+    width: 30px;
 }
 /*services2*/
 /*services3*/
