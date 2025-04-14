@@ -82,17 +82,6 @@ window.addEventListener('scroll', () => {
     SCROLL_CONTAINER.style.opacity = opacity;
 });
 
-
-const scrollToSection = (sectionId) => {
-    const targetElement = document.getElementById(sectionId);
-    
-    if (targetElement) {
-      targetElement.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
-}
 ABAOUT_AREA.addEventListener("mouseover", () => {
     CIRCLE_MOUSE.style.borderColor = "#000"; 
 });
@@ -198,7 +187,3 @@ const targetAnimation = () => {
     TITLE_ANIMATION.children[2].style.animation = "animation-tec-text 3s infinite linear";
 }
 setTimeout(targetAnimation, 5000)
-scrollToSection("loginBtn");
-scrollToSection();
-scrollToSection();
-scrollToSection();
