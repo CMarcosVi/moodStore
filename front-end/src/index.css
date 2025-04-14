@@ -13,9 +13,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+
 body{
   width: 100%;
   height: 100vh;
+  background: linear-gradient(32deg,rgba(0, 0, 0, 1) 0%, rgba(34, 34, 34, 1) 100%);
 }
 #root {
   margin: 0 auto;
@@ -23,6 +26,32 @@ body{
   display: flex;
   width: 100%;
   height: 100%;
+}
+.linksNavBar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 55px;
+  height: 55px;
+  border: 2px solid #ffffff;
+  border-radius: 50px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: .5s;
+}
+.linksNavBar:hover{
+  background-color: #ffffff;
+  transition: .5s;
+}
+.linksNavBar:hover > img{
+  filter: invert(.7);
+
+}
+.linksNavBar:focus{
+  background-color: #ffffff;
+}
+.linksNavBar:focus > img{
+  filter: invert(1) !important;
 }
 .navBar{
   width: 10vw;
@@ -35,8 +64,65 @@ body{
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  border-radius: 50px;
+  background-color: #121212;
+  width: 65px;
+  padding: 10px;
+  box-shadow: rgb(20, 20, 20) 3px 3px 6px 0px inset, rgba(20, 20, 20, 0.5) -3px -3px 6px 1px inset;
+  height: 90vh;
+  border: 2px solid #fff;
 }
+.homeSection,.loginSection,.myAccountSection{
+  width: 90vw;
+}
+.img-nav-bar{
+  max-width: 30px;
+}
+
+.navBarUtilizarion{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media only screen and (max-width: 1080px) {
+  .navBar{
+    width: 13vw !important;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -57,36 +143,4 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }
