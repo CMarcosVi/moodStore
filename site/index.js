@@ -15,6 +15,10 @@ const SERVICE = document.querySelectorAll("service");
 const SCROLL_CONTAINER = document.querySelector('.scroll-container');
 const SERVICE_LOADING = document.querySelector('.loading-projects')
 const SERVICE_LOADING_TEXT = document.querySelector('.text-loading')
+const SERVICES_LIST = document.querySelectorAll(".service-type-2");
+const TECNOLOGIS_LIST = document.querySelectorAll(".tecnologis-used");
+const ABAOUT_AREA = document.querySelector(".about-text");
+const LOGO_ABAOUT_AREA = document.querySelector(".logo-text-container");
 
 
 const CONTAINER_FRONT_END = document.getElementsByClassName("front-end-container")[0]; // Acessando o primeiro elemento
@@ -88,8 +92,40 @@ const scrollToSection = (sectionId) => {
         block: 'start'
       });
     }
-  }
+}
+ABAOUT_AREA.addEventListener("mouseover", () => {
+    CIRCLE_MOUSE.style.borderColor = "#000"; 
+});
 
+ABAOUT_AREA.addEventListener("mouseout", () => {
+    CIRCLE_MOUSE.style.borderColor = "#fff"; 
+});
+
+LOGO_ABAOUT_AREA.addEventListener("mouseover", () => {
+    CIRCLE_MOUSE.style.borderColor = "#fff"; 
+});
+
+LOGO_ABAOUT_AREA.addEventListener("mouseout", () => {
+    CIRCLE_MOUSE.style.borderColor = "#000"; 
+});
+
+SERVICES_LIST.forEach((element) => {
+    element.addEventListener("mouseover", () => {
+        CIRCLE_MOUSE.style.borderColor = "#000"; 
+    })
+    element.addEventListener("mouseout", () => {
+        CIRCLE_MOUSE.style.borderColor = "#fff"; 
+    })
+});
+
+TECNOLOGIS_LIST.forEach((element) => {
+    element.addEventListener("mouseover", () => {
+        CIRCLE_MOUSE.style.borderColor = "#000"; 
+    })
+    element.addEventListener("mouseout", () => {
+        CIRCLE_MOUSE.style.borderColor = "#fff"; 
+    })
+});
 TECNOLOGIS_USED.forEach((element) => {
     element.addEventListener("click", () => {
         element.classList.toggle('select-tecnologi');
@@ -102,9 +138,6 @@ TECNOLOGIS_USED.forEach((element) => {
     });
 });
 SERVICE_LIST.forEach((element) => {
-    element.addEventListener("click", () => {
-        element.classList.toggle('select-service');
-    });
     element.addEventListener("mouseover", () => {
         if(element.classList.contains('select-service')){
             CIRCLE_MOUSE.style.borderColor = "#000"; 
