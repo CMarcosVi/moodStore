@@ -1,38 +1,24 @@
 import { Link, useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../redux/store";
-import { logout } from "../redux/slices/userSlice";
 
 const Navbar = () => {
   const location = useLocation();
-  const dispatch = useDispatch();
-  const isAuthenticated = useSelector((state: RootState) => state.user.isLoggedIn);
-
-  const handleLogout = () => {
-    dispatch(logout());
-  };
 
   return (
-    <nav style={styles.nav}>
+    <nav style={styles.nav} className="navBar">
       <h2 style={styles.logo}>MeuApp</h2>
       <ul style={styles.links}>
         <li>
           <Link style={linkStyle(location.pathname === "/")} to="/">Home</Link>
         </li>
-        {!isAuthenticated ? (
-          <li>
-            <Link style={linkStyle(location.pathname === "/login")} to="/login">Login</Link>
-          </li>
-        ) : (
-          <>
-            <li>
-              <Link style={linkStyle(location.pathname === "/dashboard")} to="/dashboard">Dashboard</Link>
-            </li>
-            <li>
-              <button onClick={handleLogout} style={styles.logout}>Sair</button>
-            </li>
-          </>
-        )}
+        <li>
+          <Link style={linkStyle(location.pathname === "/login")} to="/login">Login</Link>
+        </li>
+        <li>
+          <Link style={linkStyle(location.pathname === "/dashboard")} to="/dashboard">Dashboard</Link>
+        </li>
+        <li>
+          <button style={styles.logout}>Sair</button>
+        </li>
       </ul>
     </nav>
   );
