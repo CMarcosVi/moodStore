@@ -549,9 +549,7 @@ nav{
 .service-type-2 > div > .icon-container-services > h3{
     color: #000 !important;
 }
-.service-type-2 > div > .icon-container-services > img{
-    filter: invert(1);
-}
+
 .service-type-2 > div > p{
     color: #000 !important;
 }
