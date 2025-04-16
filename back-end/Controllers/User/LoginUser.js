@@ -39,14 +39,6 @@ const loginUser = async (req, res) => {
         // Atualizar o token no banco de dados do usuário
         await user.update({ token });
 
-        // Enviar o token como cookie na resposta
-        res.cookie('token', token, {
-            httpOnly: true,  // O cookie não pode ser acessado via JavaScript
-            secure: false,   // Defina como 'true' se você estiver usando HTTPS
-            maxAge: 10080000, // Expiração do cookie (1 hora, por exemplo)
-            sameSite: 'None', // Se você estiver trabalhando com diferentes domínios, use 'None'
-        });
-
         // Retornar a resposta com sucesso e o token
         return res.status(200).json({ 
             message: 'Login bem-sucedido',

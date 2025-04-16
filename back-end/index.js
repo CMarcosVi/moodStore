@@ -14,7 +14,7 @@ import cookieParser from 'cookie-parser';
 const app = express();
 const port = 3000;
 const corsOptions = {
-    origin: ['http://localhost:3000','http://localhost:5900'],
+    origin: ['http://localhost:3000','http://localhost:5173'],
     credentials: true,
 };
 
@@ -26,10 +26,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-app.post('/loginUser', generalLimiter , verifyIP, async (req, res) => {
+app.post('/loginUser', generalLimiter , async (req, res) => {
     try {
         const { default: loginUser } = await import('./Controllers/User/LoginUser.js');
         loginUser(req, res);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+app.post('/verifyToken', generalLimiter , async (req, res) => {
+    try {
+        const { default: VerifyToken } = await import('./Controllers/User/VerifyToken.js');
+        VerifyToken(req, res);
     } catch (error) {
         console.log(error);
         res.status(500).send('Internal Server Error');
@@ -101,7 +110,7 @@ app.put('/products/EditProduct',generalLimiterProducts, verificarTokenUser, veri
         res.status(500).send('Internal Server Error');
     }
 });
-app.post('/products/RequestAllProducts',generalLimiterProducts, verificarTokenUser, verifyIP, async (req,res) => {
+app.post('/products/RequestAllProducts',/*generalLimiterProducts, verificarTokenUser, verifyIP,*/ async (req,res) => {
     try {
         const { default: requestAllProduct } = await import('./Controllers/Products/RequestAllProducts.js');
         requestAllProduct(req, res);
