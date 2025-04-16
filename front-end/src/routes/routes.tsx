@@ -5,6 +5,7 @@ import ProtectedRoute from "../middleware/RouteVerify.js"
 const Home = lazy(() => import("../pages/Home"));
 const Login = lazy(() => import("../pages/Login"));
 const User = lazy(() => import("../pages/User"));
+const CreateItem = lazy(() => import("../pages/products/CreateItem"));
 
 const RoutesApp = () => {
   return (
@@ -14,6 +15,7 @@ const RoutesApp = () => {
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<Home />} />
           <Route path="/user" element={<User />} />
+          <Route path="/Product/CreateItem" element={<CreateItem />} />
         </Route>
       </Routes>
     </Suspense>

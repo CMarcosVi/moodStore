@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+
 
 interface Product {
   id: string;
@@ -33,6 +35,10 @@ const Home = () => {
   return (
     <section className="homeSection">
       <h2>Produtos</h2>
+      <div>
+        <Link to="createItem">
+        </Link>
+      </div>
       <ul>
         {products.map((product) => (
           <li key={product.id}>
