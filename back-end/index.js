@@ -101,7 +101,7 @@ app.post('/products/CreateProduct',generalLimiterProducts, verificarTokenUser, v
         res.status(500).send('Internal Server Error');
     }
 })
-app.put('/products/EditProduct',generalLimiterProducts, verificarTokenUser, verifyIP, async (req, res) => {
+app.put('/products/EditProduct',/*generalLimiterProducts, verificarTokenUser, verifyIP,*/ async (req, res) => {
     try {
         const { default: updateProduct } = await import('./Controllers/Products/EditProducts.js');
         updateProduct(req, res);
@@ -119,7 +119,7 @@ app.post('/products/RequestAllProducts',/*generalLimiterProducts, verificarToken
         res.status(500).send('Internal Server Error');
     }
 })
-app.post('/products/RequestProduct',generalLimiterProducts, verificarTokenUser, verifyIP, async (req,res) => {
+app.post('/products/RequestProduct',generalLimiterProducts, /*verificarTokenUser, verifyIP,*/ async (req,res) => {
     try {
         const { default: requestProducts } = await import('./Controllers/Products/RequestProduct.js');
         requestProducts(req, res);
