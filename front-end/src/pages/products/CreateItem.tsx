@@ -1,4 +1,6 @@
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import Cookies from "js-cookie"; // 👈 para pegar o token
 
 interface FormValue {
   name: string;
@@ -10,8 +12,26 @@ interface FormValue {
 const CreateItem = () => {
   const { register, handleSubmit } = useForm<FormValue>();
 
-  const onSubmit = (data: FormValue) => {
-    console.log("Item enviado:", data);
+  const onSubmit = async (data: FormValue) => {
+    const token = Cookies.get("token");
+
+    if (!token) {
+      alert("Token não encontrado. Faça login novamente.");
+      return;
+    }
+
+    try {
+      await axios.post("http://localhost:3000/products/CreateProduct", data, {
+        headers: {
+          Authorization: `Bearer ${token}`, // ✅ envia o token no header
+        },
+      });
+
+      alert("Produto cadastrado com sucesso!");
+    } catch (error) {
+      console.error("❌ Erro ao cadastrar produto:", error);
+      alert("Erro ao cadastrar item.");
+    }
   };
 
   return (

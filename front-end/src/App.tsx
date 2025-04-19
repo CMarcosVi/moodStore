@@ -7,7 +7,6 @@ import Navbar from "./components/Navbar";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 
-// Componente interno para lidar com lógica baseada na rota
 const AppContent = () => {
   const location = useLocation();
   const [token, setToken] = useState<string | undefined>(Cookies.get("token"));
@@ -15,7 +14,7 @@ const AppContent = () => {
   useEffect(() => {
     const newToken = Cookies.get("token");
     setToken(newToken);
-  }, [location]); // só roda quando a rota muda
+  }, [location]);
 
   return (
     <>

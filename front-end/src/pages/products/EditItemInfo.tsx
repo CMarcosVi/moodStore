@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Cookies from "js-cookie"; // ← mantém aqui para pegar o token
 
 interface FormValue {
   name: string;
@@ -21,22 +22,29 @@ const EditItem = () => {
         setProductExists(false);
         return;
       }
-  
+
       try {
-        const response = await axios.post("http://localhost:3000/products/RequestProduct", {
-          id_product: Number(id_product),
-        });
-  
+        const token = Cookies.get("token");
+
+        const response = await axios.post(
+          "http://localhost:3000/products/RequestProduct",
+          { id_product: Number(id_product) },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // ✅ token enviado na verificação
+            },
+          }
+        );
+
         console.log("📦 Resposta do backend:", response.data);
-  
-        // Verifique se o backend retornou algo diretamente
+
         const produto = response.data?.value || response.data;
-  
+
         if (produto && typeof produto === "object") {
           console.log("✅ Produto encontrado:", produto);
           setProductExists(true);
         } else {
-          console.warn("❌ Produto não encontrado (objeto vazio ou inválido).");
+          console.warn("❌ Produto não encontrado.");
           setProductExists(false);
         }
       } catch (error) {
@@ -44,14 +52,25 @@ const EditItem = () => {
         setProductExists(false);
       }
     };
-  
+
     verificarProduto();
   }, [id_product]);
-  
 
   const onSubmit = async (data: FormValue) => {
+    const token = Cookies.get("token");
+
+    if (!token) {
+      alert("Token não encontrado. Faça login novamente.");
+      return;
+    }
+
     try {
-      await axios.put("http://localhost:3000/products/EditProduct", data);
+      await axios.put("http://localhost:3000/products/EditProduct", data, {
+        headers: {
+          Authorization: `Bearer ${token}`, // ✅ token enviado na edição
+        },
+      });
+
       alert("Produto atualizado com sucesso!");
     } catch (error) {
       console.error("❌ Erro ao atualizar produto:", error);
@@ -60,7 +79,6 @@ const EditItem = () => {
   };
 
   if (productExists === null) return <p>🔄 Verificando produto...</p>;
-
   if (!productExists) return <p>❌ Produto não encontrado. Verifique o ID na URL.</p>;
 
   return (
