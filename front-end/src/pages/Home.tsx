@@ -18,7 +18,6 @@ const Home = () => {
 
   const fetchProducts = async () => {
     const token = Cookies.get("token");
-    console.log(token)
     if (!token) {
       console.warn("Token não encontrado. Redirecionando para login.");
       // Se quiser, pode redirecionar para login aqui
@@ -52,7 +51,6 @@ const Home = () => {
     if (!confirmDelete) return;
 
     const token = Cookies.get("token");
-    console.log(token)
     if (!token) {
       alert("Token não encontrado. Faça login novamente.");
       return;

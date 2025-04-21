@@ -3,7 +3,6 @@ import Team from '../../../Models/Team.js';
 const deleteTeam = async (req, res) => {
   try {
     const { nameTeam } = req.body;
-    console.log(nameTeam);
     const team = await Team.findOne({where :{nameTeam}});
 
     if (team) {

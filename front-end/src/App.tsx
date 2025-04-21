@@ -16,10 +16,8 @@ const AppContent = () => {
     const newToken = Cookies.get("token");
     setToken(newToken);
 
-    // Verifica se está na rota /login
     const isLoginRoute = location.pathname === "/login";
 
-    // Atualiza se a navbar deve ser exibida
     setShowNavbar(!!newToken && !isLoginRoute);
   }, [location]);
 

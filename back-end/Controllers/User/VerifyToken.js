@@ -3,9 +3,6 @@ import User from "../../Models/Users.js";
 const VerifyToken = async (req, res, next) => {
   try {
     const token = req.headers.authorization?.replace("Bearer ", "");
-
-    console.log("Authorization header bruto:", token);
-
     if (!token) {
       return res.status(401).json({ error: "Token não fornecido ou mal formatado." });
     }
