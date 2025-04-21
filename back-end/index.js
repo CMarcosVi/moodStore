@@ -110,7 +110,7 @@ app.put('/products/EditProduct',/*generalLimiterProducts, verificarTokenUser, ve
         res.status(500).send('Internal Server Error');
     }
 });
-app.post('/products/RequestAllProducts',/*generalLimiterProducts, verificarTokenUser, verifyIP,*/ async (req,res) => {
+app.post('/products/RequestAllProducts',generalLimiterProducts, verificarTokenUser, /*verifyIP,*/ async (req,res) => {
     try {
         const { default: requestAllProduct } = await import('./Controllers/Products/RequestAllProducts.js');
         requestAllProduct(req, res);

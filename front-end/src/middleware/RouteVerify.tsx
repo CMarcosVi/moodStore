@@ -11,28 +11,39 @@ const ProtectedRoute = () => {
       const token = Cookies.get("token");
 
       if (!token) {
+        console.warn("🔒 Nenhum token encontrado. Redirecionando...");
         setAuthorized(false);
         return;
       }
 
       try {
-        const response = await axios.post("http://localhost:3000/verifyToken", {
-          token,
+        await axios.post("http://localhost:3000/verifyToken", {}, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         });
-        console.log(response.status)
-        setAuthorized(response.status == 200);
+
+        setAuthorized(true); // ✅ Token válido
       } catch (error) {
-        console.error("Token inválido ou erro na verificação:", error);
-        setAuthorized(false);
+        console.error("❌ Erro na verificação do token:", error);
+        setAuthorized(false); // ❌ Token inválido ou erro
       }
     };
 
     checkAuth();
   }, []);
 
-  if (authorized === null) return <p>Verificando autenticação...</p>;
+  if (authorized === null) {
+    return <p>🔐 Verificando autenticação...</p>;
+  }
 
-  return authorized ? <Outlet /> : <Navigate to="/login" replace />;
+  // ❌ Token ausente ou inválido: redireciona
+  if (authorized === false) {
+    return <Navigate to="/login" replace />;
+  }
+
+  // ✅ Token válido: permite acesso
+  return <Outlet />;
 };
 
 export default ProtectedRoute;

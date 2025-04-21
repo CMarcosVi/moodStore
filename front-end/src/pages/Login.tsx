@@ -28,24 +28,22 @@ const Login = () => {
   const onSubmit = async (data: FormValues) => {
     try {
       const response = await axios.post("http://localhost:3000/loginUser", data);
-
       const token = response.data.token;
 
       if (token) {
-        // ✅ Salvar token com segurança por 7 dias
         Cookies.set("token", token, {
           expires: 7,
-          secure: true, // só transmite via HTTPS (desabilite localmente se necessário)
-          sameSite: "strict", // proteção CSRF
+          secure: true,
+          sameSite: "strict",
         });
 
-        navigate("/Home");
+        navigate("/"); // ou "/Home" dependendo da sua rota inicial protegida
       } else {
         setError("Login falhou. Token não retornado.");
       }
     } catch (err) {
       setError("Credenciais inválidas ou erro na requisição.");
-      console.error(err);
+      console.error("Erro durante login:", err);
     }
   };
 
