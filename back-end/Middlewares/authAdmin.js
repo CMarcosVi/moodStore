@@ -2,13 +2,12 @@ import User from '../Models/Users.js';
 import cookieParser from 'cookie-parser';
 
 const verificarTokenAdmin = async (req, res, next) => {
-    const token = req.cookies.token;  
-
-    if (!token) {
-        return res.redirect('/login');
-    }
-
     try {
+        const token = req.headers.authorization?.replace("Bearer ", "");
+
+        if (!token) {
+            return res.redirect('/login');
+        }
         const user = await User.findOne({ where: { token } });
 
         if (!user || user.type_user !== 'admin') {

@@ -44,6 +44,15 @@ app.post('/verifyToken', generalLimiter , async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+app.post('/VerifyAdmin', generalLimiter , async (req, res) => {
+    try {
+        const { default: VerifyAdmin } = await import('./Controllers/Controllers/User/VerifyAdmin.js');
+        VerifyAdmin(req, res);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
 app.post('/admin/FindUser',generalLimiterAdmin, verificarTokenAdmin, verifyIP, async (req, res) => {
     try {
         const { default: requestUser } = await import('./Controllers/Admin/RequestUser.js');
