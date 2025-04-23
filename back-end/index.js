@@ -44,9 +44,9 @@ app.post('/verifyToken', generalLimiter , async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
-app.post('/VerifyAdmin', generalLimiter , async (req, res) => {
+app.post('/VerifyAdmin' , async (req, res) => {
     try {
-        const { default: VerifyAdmin } = await import('./Controllers/Controllers/User/VerifyAdmin.js');
+        const { default: VerifyAdmin } = await import('./Controllers/User/VerifyAdmin.js');
         VerifyAdmin(req, res);
     } catch (error) {
         console.log(error);
@@ -62,7 +62,7 @@ app.post('/admin/FindUser',generalLimiterAdmin, verificarTokenAdmin, verifyIP, a
         res.status(500).send('Internal Server Error');
     }
 });
-app.post('/admin/ResquerAllUsers',generalLimiterAdmin, verificarTokenAdmin, verifyIP, async (req,res) => {
+app.post('/admin/ResquerAllUsers',generalLimiterAdmin, verificarTokenAdmin, async (req,res) => {
     try {
         const { default: requestAllUser } = await import('./Controllers/Admin/ResquerAllUsers.js');
         requestAllUser(req, res);
@@ -148,7 +148,7 @@ app.delete('/products/DeleteProduct',generalLimiterProducts, verificarTokenUser,
 })
 
 /*Teams*/
-app.post('/admin/teams/AllTeams',generalLimiterAdmin, verificarTokenAdmin, verifyIP, async (req,res) => {
+app.post('/admin/teams/AllTeams',generalLimiterAdmin, verificarTokenAdmin, async (req,res) => {
     try {
         const { default: getAllTeams } = await import('./Controllers/Admin/team/AllTems.js');
         getAllTeams(req, res);
@@ -204,7 +204,7 @@ app.post('/CreateCustomer',generalLimiterAdmin, verificarTokenAdmin, verifyIP, a
         res.status(500).send('Internal Server Error');
     }
 })
-app.post('/AllCustomers',generalLimiterAdmin, verificarTokenAdmin, verifyIP, async (req,res) => {
+app.post('/AllCustomers',generalLimiterAdmin, verificarTokenAdmin   , async (req,res) => {
     try {
         const { default: AllCustomers } = await import('./Controllers/Customers/AllCustomer.js');
         AllCustomers(req, res);

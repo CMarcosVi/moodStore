@@ -17,17 +17,17 @@ const RoutePrivate = () => {
       }
 
       try {
-        // 🔐 1. Verifica se o usuário é admin
-        await axios.post("http://localhost:3000/VerifyAdmin", {}, {
+        const response = await axios.post("http://localhost:3000/VerifyAdmin", {}, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
 
-        setAuthorized(true); // ✅ Token válido e é admin
+        console.log("✅ Usuário autorizado:", response.data);
+        setAuthorized(true);
       } catch (error) {
-        console.error("❌ Usuário não autorizado:", error);
-        setAuthorized(false); // ❌ Token inválido ou não é admin
+        console.error("❌ Erro na verificação de admin:");
+        setAuthorized(false);
       }
     };
 
@@ -35,14 +35,14 @@ const RoutePrivate = () => {
   }, []);
 
   if (authorized === null) {
-    return <p>🔐 Verificando autenticação...</p>;
+    return <p>🔐 Verificando autenticação...</p>; // loading
   }
 
   if (authorized === false) {
     return <Navigate to="/login" replace />;
   }
 
-  return <Outlet />;
+  return <Outlet />; // acesso liberado
 };
 
 export default RoutePrivate;

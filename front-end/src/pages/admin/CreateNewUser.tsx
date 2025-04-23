@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import axios from "axios";
-import "./CreateUser.css";
 
 const CreateUser = () => {
   const navigate = useNavigate();
@@ -34,7 +33,7 @@ const CreateUser = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:3000/admin/createAcount", form, {
+       await axios.post("http://localhost:3000/admin/createAcount", form, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

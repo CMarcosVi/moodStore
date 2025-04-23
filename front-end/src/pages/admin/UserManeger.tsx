@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import "./UserManeger.css"; // ← importa o CSS externo
 import { useNavigate } from "react-router-dom";
-
 
 interface UserData {
   id_collaborator: number;
@@ -14,7 +12,7 @@ interface UserData {
   position: string;
 }
 
-const UserManeger = () => {
+const UserManager = () => {
   const [users, setUsers] = useState<UserData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -22,8 +20,10 @@ const UserManeger = () => {
   const [showDeleteModal, setShowDeleteModal] = useState<number | null>(null);
   const [showEditModal, setShowEditModal] = useState<UserData | null>(null);
   const [editForm, setEditForm] = useState<Partial<UserData>>({});
+  const navigate = useNavigate();
 
   const token = Cookies.get("token");
+  const headers = { Authorization: `Bearer ${token}` };
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -32,37 +32,35 @@ const UserManeger = () => {
         setLoading(false);
         return;
       }
-
+  
       try {
-        const response = await axios.post("http://localhost:3000/admin/ResquerAllUsers", {}, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.post("http://localhost:3000/admin/ResquerAllUsers", {}, { headers });
+        console.log("📦 Dados da API:", response.data.value);
+  
 
-        setUsers(response.data);
+        setUsers(response.data.value);
       } catch (err) {
-        console.error("Erro ao buscar usuários:", err);
+        console.error("❌ Erro ao buscar usuários:", err);
         setError("Erro ao buscar usuários.");
       } finally {
         setLoading(false);
       }
     };
-
+  
     fetchUsers();
   }, []);
-
-  const handleDelete = async (id: number) => {    
+  
+  const handleDelete = async (id: number) => {
     try {
-      await axios.delete(`http://localhost:3000/admin/DeleteUser`, {
-        headers: { Authorization: `Bearer ${token}` },
+      await axios.delete("http://localhost:3000/admin/DeleteUser", {
+        headers,
         data: { id_collaborator: id },
       });
 
       setUsers((prev) => prev.filter((user) => user.id_collaborator !== id));
       setShowDeleteModal(null);
     } catch (err) {
-      console.error("Erro ao deletar usuário:", err);
+      console.error("❌ Erro ao deletar usuário:", err);
       alert("Erro ao deletar usuário.");
     }
   };
@@ -75,14 +73,12 @@ const UserManeger = () => {
       name: editForm.name || showEditModal.name,
       email: editForm.email || showEditModal.email,
       access: editForm.access || showEditModal.access,
-      wage: editForm.wage || showEditModal.wage,
+      wage: editForm.wage ?? showEditModal.wage,
       position: editForm.position || showEditModal.position,
     };
 
     try {
-      await axios.put("http://localhost:3000/admin/EditUser", updatedData, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.put("http://localhost:3000/admin/EditUser", updatedData, { headers });
 
       setUsers((prev) =>
         prev.map((u) =>
@@ -93,20 +89,22 @@ const UserManeger = () => {
       setShowEditModal(null);
       setEditForm({});
     } catch (err) {
-      console.error("Erro ao editar usuário:", err);
+      console.error("❌ Erro ao editar usuário:", err);
       alert("Erro ao editar usuário.");
     }
   };
 
   if (loading) return <p>🔄 Carregando usuários...</p>;
   if (error) return <p className="error">{error}</p>;
-  const navigate = useNavigate();
+
   return (
     <section className="user-manager">
       <h2>Gerenciamento de Usuários</h2>
+
       <button className="create-user-btn" onClick={() => navigate("/AdminManeger/CreateNewUser")}>
         ➕ Criar novo usuário
       </button>
+
       <table className="user-table">
         <thead>
           <tr>
@@ -146,16 +144,34 @@ const UserManeger = () => {
       {showEditModal && (
         <div className="modal">
           <h3>Editar Usuário</h3>
-          <input placeholder="Nome" defaultValue={showEditModal.name}
-            onChange={(e) => setEditForm({ ...editForm, name: e.target.value })} />
-          <input placeholder="Email" defaultValue={showEditModal.email}
-            onChange={(e) => setEditForm({ ...editForm, email: e.target.value })} />
-          <input placeholder="Acesso" defaultValue={showEditModal.access}
-            onChange={(e) => setEditForm({ ...editForm, access: e.target.value })} />
-          <input placeholder="Salário" type="number" defaultValue={showEditModal.wage}
-            onChange={(e) => setEditForm({ ...editForm, wage: parseFloat(e.target.value) })} />
-          <input placeholder="Posição" defaultValue={showEditModal.position}
-            onChange={(e) => setEditForm({ ...editForm, position: e.target.value })} />
+
+          <input
+            placeholder="Nome"
+            defaultValue={showEditModal.name}
+            onChange={(e) => setEditForm({ ...editForm, name: e.target.value })}
+          />
+          <input
+            placeholder="Email"
+            defaultValue={showEditModal.email}
+            onChange={(e) => setEditForm({ ...editForm, email: e.target.value })}
+          />
+          <input
+            placeholder="Acesso"
+            defaultValue={showEditModal.access}
+            onChange={(e) => setEditForm({ ...editForm, access: e.target.value })}
+          />
+          <input
+            placeholder="Salário"
+            type="number"
+            defaultValue={showEditModal.wage}
+            onChange={(e) => setEditForm({ ...editForm, wage: parseFloat(e.target.value) })}
+          />
+          <input
+            placeholder="Posição"
+            defaultValue={showEditModal.position}
+            onChange={(e) => setEditForm({ ...editForm, position: e.target.value })}
+          />
+
           <div className="modal-buttons">
             <button onClick={handleEditSubmit}>Salvar</button>
             <button onClick={() => setShowEditModal(null)}>Cancelar</button>
@@ -166,4 +182,4 @@ const UserManeger = () => {
   );
 };
 
-export default UserManeger;
+export default UserManager;

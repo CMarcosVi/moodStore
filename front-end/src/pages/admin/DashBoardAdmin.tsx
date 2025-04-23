@@ -2,14 +2,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-import "./AdminDashboard.css";
 
 const AdminDashboard = () => {
   const [usersCount, setUsersCount] = useState(0);
   const [teamsCount, setTeamsCount] = useState(0);
-  const [clientsCount, setClientsCount] = useState(0);
   const navigate = useNavigate();
-
+  
   const token = Cookies.get("token");
 
   useEffect(() => {
@@ -17,15 +15,12 @@ const AdminDashboard = () => {
       try {
         const headers = { Authorization: `Bearer ${token}` };
 
-        const [users, teams, customers] = await Promise.all([
+        const [users, teams] = await Promise.all([
           axios.post("http://localhost:3000/admin/ResquerAllUsers", {}, { headers }),
-          axios.get("http://localhost:3000/admin/teams/AllTeams", { headers }),
-          axios.get("http://localhost:3000/AllCustomers", { headers }),
+          axios.post("http://localhost:3000/admin/teams/AllTeams",{}, { headers }),
         ]);
-
-        setUsersCount(users.data.length || 0);
+        setUsersCount(users.data.value.length|| 0);
         setTeamsCount(teams.data.length || 0);
-        setClientsCount(customers.data.length || 0);
       } catch (err) {
         console.error("Erro ao buscar dados do dashboard:", err);
       }
@@ -47,16 +42,11 @@ const AdminDashboard = () => {
           <h3>Total de Times</h3>
           <p>{teamsCount}</p>
         </div>
-        <div className="dashboard-card">
-          <h3>Total de Clientes</h3>
-          <p>{clientsCount}</p>
-        </div>
       </div>
 
       <div className="dashboard-buttons">
         <button onClick={() => navigate("/AdminManeger/UserManeger")}>Gerenciar Usuários</button>
         <button onClick={() => navigate("/AdminManeger/TeamsNameger")}>Gerenciar Times</button>
-        <button onClick={() => navigate("/admin/customers")}>Gerenciar Clientes</button>
       </div>
     </section>
   );
